@@ -1,0 +1,8 @@
+.DS_Store
+builds
+memo
+dist
+functions
+deploy.sh
+archive
+.wrangler

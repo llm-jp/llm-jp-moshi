@@ -1,0 +1,148 @@
+/* Logo colors */
+:root {
+    --color-pink: #F5A0B4;
+    --color-purple: #A78DC9;
+    --color-blue: #8DBAE8;
+    --color-green: #7FD9B3;
+    --color-orange: #DDA06D;
+}
+
+h1, h2, h3, h4, h5, h6, body, b, strong, th {
+    color: #595959;
+}
+
+/* Header gradient background */
+.header-section {
+    background: linear-gradient(135deg, rgba(245, 160, 180, 0.15) 0%, rgba(167, 141, 201, 0.15) 25%, rgba(141, 186, 232, 0.15) 50%, rgba(127, 217, 179, 0.15) 75%, rgba(221, 160, 109, 0.15) 100%);
+    padding: 2rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+    border-bottom: 3px solid;
+    border-image: linear-gradient(90deg, var(--color-pink), var(--color-purple), var(--color-blue), var(--color-green), var(--color-orange)) 1;
+}
+
+.header-section h2 {
+    color: #595959;
+}
+
+/* Section headers with accent colors */
+.container h3 {
+    border-left: 4px solid var(--color-purple);
+    padding-left: 0.75rem;
+}
+
+/* Card styling */
+.card {
+    border-top: 3px solid var(--color-blue);
+}
+
+/* Primary buttons with gradient */
+.btn-primary {
+    background: linear-gradient(90deg, var(--color-purple), var(--color-blue));
+    border: none;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(90deg, var(--color-pink), var(--color-purple));
+}
+
+/* Table header styling */
+.table thead {
+    background: linear-gradient(90deg, rgba(167, 141, 201, 0.2), rgba(141, 186, 232, 0.2));
+}
+
+/* Links */
+a:not(.btn) {
+    color: var(--color-purple);
+}
+
+a:not(.btn):hover {
+    color: var(--color-pink);
+}
+
+th, td {
+    vertical-align: middle;
+    text-align: center;
+}
+
+.audio-table audio {
+    max-width: 100%;
+}
+
+.btn-secondary {
+    padding: 0.1rem 0.8rem;
+    font-size: small
+}
+
+.ratio-8x5 {
+    --bs-aspect-ratio: 62.5%;
+}
+
+.footnote {
+    margin-top: 2rem;
+}
+
+.footnote-divider {
+    margin: 1rem 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    width: 25%;  /* Make the divider shorter than full width */
+}
+
+.footnote small {
+    font-size: 0.875rem;
+    color: #6c757d;
+}
+
+.footnote-ref {
+    font-size: x-small;
+    vertical-align: super;
+}
+
+
+.lang-switch {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 5px;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.lang-switch.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+[lang]:not(.active-lang) {
+    display: none !important;
+}
+
+/* Dataset toggle buttons */
+.dataset-btn {
+    transition: all 0.3s ease;
+}
+
+.dataset-content {
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Header links hover effect */
+.header-link {
+    color: var(--color-purple);
+    transition: all 0.2s ease;
+}
+
+.header-link:hover {
+    color: var(--color-pink);
+    background: linear-gradient(90deg, rgba(167, 141, 201, 0.15), rgba(245, 160, 180, 0.15));
+    transform: translateY(-1px);
+}
