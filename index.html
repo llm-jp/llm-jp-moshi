@@ -122,8 +122,8 @@
     <h3 lang="en">Evaluation Results</h3>
 
     <p lang="ja">
-      対話継続タスク（入力音声対話に対して，その続きとなる対話音声を生成させ，その妥当性について評価を行うタスク）において，LLM-as-a-Judgeによる客観的自動評価とクラウドワーカー主観評価の双方を実施し，既存の公開モデルである<a href="https://huggingface.co/nu-dialogue/j-moshi" target="_blank">J-Moshi</a>（J-Moshi-extではなくJ-Moshi）と比較して，自然性および意味的適切性の両面で優位な性能を示しました（下表参照）．
-      入力音声としては，LLM-jp-Zoom1のヘルドアウトしたテストデータ，<a href="https://dl.acm.org/doi/10.1145/3675166" target="_blank">Tabidachi</a>（旅行案内の音声対話），<a href="https://catalog.ldc.upenn.edu/LDC96S37" target="_blank">日本語CallHome</a>（日本語CH）を用いています．実音声は，入力音声対話の続きとなる実際の人間同士の音声を表します．
+      対話継続タスク（入力音声対話に対して，その続きとなる対話音声を生成させ，その妥当性について評価を行うタスク）において，LLM-as-a-Judgeによる客観的自動評価とクラウドワーカーによる主観評価の双方を実施し，既存の公開モデルである<a href="https://huggingface.co/nu-dialogue/j-moshi" target="_blank">J-Moshi</a>（J-Moshi-extではなくJ-Moshi）と比較して，自然性および意味的適切性の両面で優位な性能を示しました（下表参照）．
+      入力音声としては，LLM-jp-Zoom1のヘルドアウトしたテストデータ，<a href="https://dl.acm.org/doi/10.1145/3675166" target="_blank">Tabidachi</a>（旅行案内の音声対話），<a href="https://catalog.ldc.upenn.edu/LDC96S37" target="_blank">日本語CallHome</a>を用いています．実音声は，入力音声対話の続きとなる実際の人間同士の音声を表します．
     </p>
     <p lang="en">
       In the dialogue continuation task (generating the continuation of a given dialogue audio and evaluating its
@@ -154,7 +154,7 @@
     <!-- LLM-jp-Zoom1 -->
     <div class="dataset-content" id="dataset-zoom1">
       <!-- 主観評価 -->
-      <h4 lang="ja" class="mt-5">LLM-jp-Zoom1: クラウドソーシングにおける自然性と意味性の主観評価結果の値（5段階）</h4>
+      <h4 lang="ja" class="mt-5">LLM-jp-Zoom1: クラウドソーシングによる主観評価結果（自然性と意味性，5段階）</h4>
       <h4 lang="en" class="mt-5">LLM-jp-Zoom1: Subjective Evaluation Results (5-point scale) in Crowdsourcing</h4>
 
       <div class="container pt-3 table-responsive">
@@ -198,7 +198,7 @@
       </div>
 
       <!-- 客観評価 -->
-      <h4 lang="ja" class="mt-5">LLM-jp-Zoom1: MOSとLLMAJによる客観評価結果の値</h4>
+      <h4 lang="ja" class="mt-5">LLM-jp-Zoom1: 客観評価結果（MOS，LLMAJ）</h4>
       <h4 lang="en" class="mt-5">LLM-jp-Zoom1: Objective Evaluation Results (MOS and LLMAJ)</h4>
 
       <div class="container pt-3 table-responsive">
@@ -283,7 +283,7 @@
     <!-- Tabidachi -->
     <div class="dataset-content" id="dataset-tabidachi">
       <!-- 主観評価 -->
-      <h4 lang="ja" class="mt-5">Tabidachi: クラウドソーシングにおける自然性と意味性の主観評価結果の値（5段階）</h4>
+      <h4 lang="ja" class="mt-5">Tabidachi: クラウドソーシングによる主観評価結果（自然性と意味性，5段階）</h4>
       <h4 lang="en" class="mt-5">Tabidachi: Subjective Evaluation Results (5-point scale) in Crowdsourcing</h4>
 
       <div class="container pt-3 table-responsive">
@@ -327,7 +327,7 @@
       </div>
 
       <!-- 客観評価 -->
-      <h4 lang="ja" class="mt-5">Tabidachi: MOSとLLMAJによる客観評価結果の値</h4>
+      <h4 lang="ja" class="mt-5">Tabidachi: 客観評価結果（MOS，LLMAJ）</h4>
       <h4 lang="en" class="mt-5">Tabidachi: Objective Evaluation Results (MOS and LLMAJ)</h4>
 
       <div class="container pt-3 table-responsive">
@@ -412,7 +412,7 @@
     <!-- 日本語CallHome -->
     <div class="dataset-content" id="dataset-callhome">
       <!-- 主観評価 -->
-      <h4 lang="ja" class="mt-5">日本語CallHome: クラウドソーシングにおける自然性と意味性の主観評価結果の値（5段階）</h4>
+      <h4 lang="ja" class="mt-5">日本語CallHome: クラウドソーシングによる主観評価結果（自然性と意味性，5段階）</h4>
       <h4 lang="en" class="mt-5">CallHome-Japanese: Subjective Evaluation Results (5-point scale) in Crowdsourcing</h4>
 
       <div class="container pt-3 table-responsive">
@@ -457,7 +457,7 @@
       </div>
 
       <!-- 客観評価 -->
-      <h4 lang="ja" class="mt-5">日本語CallHome: MOSとLLMAJによる客観評価結果の値</h4>
+      <h4 lang="ja" class="mt-5">日本語CallHome: 客観評価結果（MOS，LLMAJ）</h4>
       <h4 lang="en" class="mt-5">CallHome-Japanese: Objective Evaluation Results (MOS and LLMAJ)</h4>
 
       <div class="container pt-3 table-responsive">
@@ -546,7 +546,7 @@
     <h3 lang="en">About the Dialogue Working Group</h3>
     <p lang="ja">
       対話ワーキンググループは，<a href="https://llm-jp.nii.ac.jp/"
-        target="_blank">LLM-jp</a>における研究活動の一環として，NII/LLMC科学主幹の東中竜一郎教授が主担当を務め，早稲田大学の小川哲司教授，慶應義塾大学の高道慎之介准教授との緊密な連携のもと推進される研究グループです．
+        target="_blank">LLM-jp</a>における研究活動の一環として設置された研究グループです．NII/LLMC科学主幹の東中竜一郎教授が主担当を務め，早稲田大学の小川哲司教授，慶應義塾大学の高道慎之介准教授との緊密に連携しながら研究を推進しています．
     </p>
     <p lang="en">
       The Dialogue Working Group is a research group within <a href="https://llm-jp.nii.ac.jp/"
