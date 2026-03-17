@@ -146,3 +146,49 @@ th, td {
     background: linear-gradient(90deg, rgba(167, 141, 201, 0.15), rgba(245, 160, 180, 0.15));
     transform: translateY(-1px);
 }
+
+/* Mobile responsive */
+@media (max-width: 767.98px) {
+    .container.p-5 {
+        padding: 1.25rem !important;
+    }
+
+    .container.pt-5.mt-5 {
+        margin-top: 3rem !important;
+        padding-top: 3rem !important;
+    }
+
+    .header-section {
+        padding: 1rem;
+    }
+
+    .header-section h2 {
+        font-size: 1.2rem;
+    }
+
+    .header-section .d-flex {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .header-section .d-flex img {
+        margin-right: 0 !important;
+        margin-bottom: 0.5rem;
+        max-width: 60px !important;
+    }
+
+    .audio-table audio {
+        min-width: 140px;
+    }
+
+    .table th, .table td {
+        font-size: 0.85rem;
+        padding: 0.4rem;
+        white-space: nowrap;
+    }
+
+    pre {
+        font-size: 0.7rem;
+        overflow-x: auto;
+    }
+}

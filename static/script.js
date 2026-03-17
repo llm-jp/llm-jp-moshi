@@ -176,7 +176,7 @@ $(document).ready(function () {
             ],
             barWidth: 2,
             height: 55,
-            width: 500,
+            responsive: true,
         });
         $(`#play-pause-${i}`).click(() => {
             wavesurfer.playPause();
