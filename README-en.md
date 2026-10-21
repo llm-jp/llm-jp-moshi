@@ -27,17 +27,19 @@ This repository introduces the LLM-jp-Moshi models (v1 / v1.1-base / v1.1-prompt
 ### LLM-jp-Moshi-v1.1-base
 - **🤗 Model:** [llm-jp/llm-jp-moshi-v1.1-base](https://huggingface.co/llm-jp/llm-jp-moshi-v1.1-base)
 - **Training Data:**
+  - [J-CHAT](https://arxiv.org/abs/2407.15828) (pre-training)
+  - Synthetic dialogue corpus (additional training: 15 topics, approx. 4,000 hours; built in-house by LLM-jp, release in preparation)
+
+A model trained from the same J-CHAT pre-training checkpoint as v1, with additional training only on a large-scale Japanese synthetic dialogue corpus built in-house by LLM-jp, covering 15 everyday topics (approx. 4,000 hours). LLM-jp-Zoom1 is not used in this additional training. It can be used with `moshi.server` in the same way as v1 (see Interactive Demo).
+
+### LLM-jp-Moshi-v1.1-prompted
+- **🤗 Model:** [llm-jp/llm-jp-moshi-v1.1-prompted](https://huggingface.co/llm-jp/llm-jp-moshi-v1.1-prompted)
+- **Training Data:** (with topic labels and text prompts)
   - [J-CHAT](https://arxiv.org/abs/2407.15828)
   - Synthetic dialogue corpus (15 topics, 93,679 dialogues, approx. 4,000 hours; built in-house by LLM-jp, release in preparation)
   - LLM-jp-Zoom1
 
-A model trained from the same J-CHAT pre-training checkpoint as v1, with additional training on a large-scale Japanese synthetic dialogue corpus built in-house by LLM-jp, covering 15 everyday topics (approx. 4,000 hours), and LLM-jp-Zoom1. The change from v1 is the expanded training data; it can be used with `moshi.server` in the same way as v1 (see Interactive Demo). It also serves as the baseline for v1.1-prompted.
-
-### LLM-jp-Moshi-v1.1-prompted
-- **🤗 Model:** [llm-jp/llm-jp-moshi-v1.1-prompted](https://huggingface.co/llm-jp/llm-jp-moshi-v1.1-prompted)
-- **Training Data:** Same as v1.1-base (with topic labels and text prompts)
-
-A model trained on the same data as v1.1-base, with topic text prompts attached. By providing a topic as a text prompt at the beginning of a dialogue, the model can be conditioned to start chatting about that topic. The conditioning mechanism follows the text-based topic conditioning part of the Hybrid System Prompt from [PersonaPlex](https://arxiv.org/abs/2602.06053). See the model card for prompt formats and limitations.
+A model additionally trained on the synthetic dialogue corpus and LLM-jp-Zoom1, with topic text prompts attached. By providing a topic as a text prompt at the beginning of a dialogue, the model can be conditioned to start chatting about that topic. The conditioning mechanism follows the text-based topic conditioning part of the Hybrid System Prompt from [PersonaPlex](https://arxiv.org/abs/2602.06053). See the model card for prompt formats and limitations.
 
 Each repository contains the following model files:
 - `model.safetensors` - The main model weights
