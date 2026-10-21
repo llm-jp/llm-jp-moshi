@@ -4,7 +4,7 @@
 
 [📑 **Paper**](https://aclanthology.org/2026.iwsds-1.10/)
 &nbsp;|&nbsp;
-[🤗 **Models**](https://huggingface.co/models?search=llm-jp-moshi)
+[🤗 **Model**](https://huggingface.co/llm-jp/llm-jp-moshi-v1)
 &nbsp;|&nbsp;
 [🖥️ **Demo**](https://llm-jp.github.io/llm-jp-moshi/)
 
