@@ -27,17 +27,19 @@ LLM-jp-Moshiは，日本語におけるfull-duplex音声対話システムです
 ### LLM-jp-Moshi-v1.1-base
 - **🤗 Model:** [llm-jp/llm-jp-moshi-v1.1-base](https://huggingface.co/llm-jp/llm-jp-moshi-v1.1-base)
 - **学習データ:**
+  - [J-CHAT](https://arxiv.org/abs/2407.15828)（事前学習）
+  - 合成対話コーパス（追加学習：15話題，約4,000時間．LLM-jpで独自に構築，公開に向けて準備中）
+
+v1と同じJ-CHAT事前学習チェックポイントから，LLM-jpで独自に構築した日常的な15話題をカバーする大規模な日本語合成対話コーパス（約4,000時間）のみで追加学習したモデルです．この追加学習にはLLM-jp-Zoom1を使用していません．使い方はv1と同じく`moshi.server`でそのまま対話できます（Interactive Demo参照）．
+
+### LLM-jp-Moshi-v1.1-prompted
+- **🤗 Model:** [llm-jp/llm-jp-moshi-v1.1-prompted](https://huggingface.co/llm-jp/llm-jp-moshi-v1.1-prompted)
+- **学習データ:**（話題ラベル・テキストプロンプト付き）
   - [J-CHAT](https://arxiv.org/abs/2407.15828)
   - 合成対話コーパス（15話題，約4,000時間．LLM-jpで独自に構築，公開に向けて準備中）
   - LLM-jp-Zoom1
 
-v1と同じJ-CHAT事前学習チェックポイントから，LLM-jpで独自に構築した日常的な15話題をカバーする大規模な日本語合成対話コーパス（約4,000時間）とLLM-jp-Zoom1で追加学習したモデルです．v1からの変更点は追加学習データの拡充で，使い方はv1と同じく`moshi.server`でそのまま対話できます（Interactive Demo参照）．v1.1-promptedのベースラインとしても位置づけられます．
-
-### LLM-jp-Moshi-v1.1-prompted
-- **🤗 Model:** [llm-jp/llm-jp-moshi-v1.1-prompted](https://huggingface.co/llm-jp/llm-jp-moshi-v1.1-prompted)
-- **学習データ:** v1.1-baseと同一（話題ラベル・テキストプロンプト付き）
-
-v1.1-baseと同一のデータに話題のテキストプロンプトを付与して学習したモデルです．対話の冒頭でテキストプロンプトとして話題を与えることで，その話題から雑談を始めるように条件づけできます．条件づけの仕組みは [PersonaPlex](https://arxiv.org/abs/2602.06053) のHybrid System Promptのうち，テキストによる話題条件づけの部分のみを参考にしています．プロンプトの書き方や制約の詳細はモデルカードを参照してください．
+合成対話コーパスとLLM-jp-Zoom1を追加学習に使用し，話題のテキストプロンプトを付与して学習したモデルです．対話の冒頭でテキストプロンプトとして話題を与えることで，その話題から雑談を始めるように条件づけできます．条件づけの仕組みは [PersonaPlex](https://arxiv.org/abs/2602.06053) のHybrid System Promptのうち，テキストによる話題条件づけの部分のみを参考にしています．プロンプトの書き方や制約の詳細はモデルカードを参照してください．
 
 各リポジトリには，以下のモデルファイルが含まれています:
 - `model.safetensors` - モデル本体の重み
