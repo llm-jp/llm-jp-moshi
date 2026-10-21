@@ -69,7 +69,7 @@ python -m moshi.server --hf-repo llm-jp/llm-jp-moshi-v1
 python -m moshi.server --hf-repo llm-jp/llm-jp-moshi-v1.1-base
 ```
 
-### v1.1-promptedと対話する場合
+#### v1.1-promptedと対話する場合
 
 > [!NOTE]
 > v1.1-promptedは，テキストプロンプトの前置（prefill）に対応した専用の推論実装が必要なため，`moshi.server`では動作しません．本リポジトリの [`inference/`](inference/) に対応サーバを同梱しています．

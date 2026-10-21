@@ -69,7 +69,7 @@ python -m moshi.server --hf-repo llm-jp/llm-jp-moshi-v1
 python -m moshi.server --hf-repo llm-jp/llm-jp-moshi-v1.1-base
 ```
 
-### Interacting with v1.1-prompted
+#### Interacting with v1.1-prompted
 
 > [!NOTE]
 > v1.1-prompted does not work with `moshi.server`, as it requires a dedicated inference implementation that supports text-prompt prefill. A compatible server is included in this repository under [`inference/`](inference/).
