@@ -28,7 +28,7 @@ This repository introduces the LLM-jp-Moshi models (v1 / v1.1-base / v1.1-prompt
 - **🤗 Model:** [llm-jp/llm-jp-moshi-v1.1-base](https://huggingface.co/llm-jp/llm-jp-moshi-v1.1-base)
 - **Training Data:**
   - [J-CHAT](https://arxiv.org/abs/2407.15828)
-  - Synthetic dialogue corpus (15 topics, approx. 4,000 hours; built in-house by LLM-jp, release in preparation)
+  - Synthetic dialogue corpus (15 topics, 93,679 dialogues, approx. 4,000 hours; built in-house by LLM-jp, release in preparation)
   - LLM-jp-Zoom1
 
 A model trained from the same J-CHAT pre-training checkpoint as v1, with additional training on a large-scale Japanese synthetic dialogue corpus built in-house by LLM-jp, covering 15 everyday topics (approx. 4,000 hours), and LLM-jp-Zoom1. The change from v1 is the expanded training data; it can be used with `moshi.server` in the same way as v1 (see Interactive Demo). It also serves as the baseline for v1.1-prompted.
