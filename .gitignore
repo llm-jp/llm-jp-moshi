@@ -6,3 +6,4 @@ functions
 deploy.sh
 archive
 .wrangler
+__pycache__/

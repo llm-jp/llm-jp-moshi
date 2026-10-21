@@ -4,13 +4,13 @@
 
 [📑 **Paper**](https://aclanthology.org/2026.iwsds-1.10/)
 &nbsp;|&nbsp;
-[🤗 **Model**](https://huggingface.co/llm-jp/llm-jp-moshi-v1)
+[🤗 **Models**](https://huggingface.co/models?search=llm-jp-moshi)
 &nbsp;|&nbsp;
 [🖥️ **Demo**](https://llm-jp.github.io/llm-jp-moshi/)
 
-LLM-jp-Moshi-v1 is a full-duplex spoken dialogue system for Japanese. Built upon the English 7B-parameter full-duplex spoken dialogue model [Moshi](https://arxiv.org/abs/2410.00037), it was developed through additional training on Japanese spoken dialogue data.
+LLM-jp-Moshi is a full-duplex spoken dialogue system for Japanese. Built upon the English 7B-parameter full-duplex spoken dialogue model [Moshi](https://arxiv.org/abs/2410.00037), it was developed through additional training on Japanese spoken dialogue data.
 
-This repository introduces the LLM-jp-Moshi-v1 model.
+This repository introduces the LLM-jp-Moshi models (v1 / v1.1-base / v1.1-prompted).
 
 > [!NOTE]
 > These models are prototypes and their responses may be unnatural.
@@ -24,15 +24,44 @@ This repository introduces the LLM-jp-Moshi-v1 model.
   - [J-CHAT](https://arxiv.org/abs/2407.15828)
   - LLM-jp-Zoom1
 
-The repository contains the following model files:
-- `model.safetensors` - The main LLM-jp-Moshi-v1 model weights
+### LLM-jp-Moshi-v1.1-base
+- **🤗 Model:** [llm-jp/llm-jp-moshi-v1.1-base](https://huggingface.co/llm-jp/llm-jp-moshi-v1.1-base)
+- **Training Data:**
+  - [J-CHAT](https://arxiv.org/abs/2407.15828)
+  - Synthetic dialogue corpus (15 topics, approx. 3,600 hours; release in preparation)
+  - LLM-jp-Zoom1
+
+A model trained from the same J-CHAT pre-training checkpoint as v1, with additional training on the synthetic dialogue corpus and LLM-jp-Zoom1.
+
+### LLM-jp-Moshi-v1.1-prompted
+- **🤗 Model:** [llm-jp/llm-jp-moshi-v1.1-prompted](https://huggingface.co/llm-jp/llm-jp-moshi-v1.1-prompted)
+- **Training Data:** Same as v1.1-base (with topic labels and text prompts)
+
+A model trained on the same data as v1.1-base, with topic text prompts attached. By providing a topic as a text prompt at the beginning of a dialogue, the model can be conditioned to start chatting about that topic. The conditioning mechanism follows the text-based topic conditioning part of the Hybrid System Prompt from [PersonaPlex](https://arxiv.org/abs/2602.06053). See the model card for prompt formats and limitations.
+
+Each repository contains the following model files:
+- `model.safetensors` - The main model weights
 - `tokenizer_spm_32k_3.model` - Text tokenizer (Japanese SentencePiece model from [rinna/japanese-gpt2-medium](https://huggingface.co/rinna/japanese-gpt2-medium))
 - `tokenizer-e351c8d8-checkpoint125.safetensors` - Audio tokenizer (Mimi model from [kyutai/moshiko-pytorch-bf16](https://huggingface.co/kyutai/moshiko-pytorch-bf16))
 
 
 ## Interactive Demo
 
-You can interact with LLM-jp-Moshi-v1 using the official [Moshi PyTorch implementation](https://github.com/kyutai-labs/moshi/tree/main/moshi) from Kyutai. For implementation details, please refer to the original Moshi repository [kyutai-labs/moshi](https://github.com/kyutai-labs/moshi).
+You can interact with LLM-jp-Moshi-v1 and v1.1-base using the official [Moshi PyTorch implementation](https://github.com/kyutai-labs/moshi/tree/main/moshi) from Kyutai. For implementation details, please refer to the original Moshi repository [kyutai-labs/moshi](https://github.com/kyutai-labs/moshi).
+
+> [!NOTE]
+> v1.1-prompted does not work with `moshi.server`, as it requires a dedicated inference implementation that supports text-prompt prefill. A compatible server is included in this repository under [`inference/`](inference/).
+
+To interact with v1.1-prompted:
+
+```bash
+cd inference
+pip install -r requirements.txt
+python server.py --hf-repo llm-jp/llm-jp-moshi-v1.1-prompted
+```
+
+Open `http://localhost:8998/` in your browser, edit the topic prompt in the input field at the top of the screen, and press 接続 (connect) to start the conversation.
+See [`inference/README.md`](inference/README.md) for options.
 
 ### Installation
 
@@ -44,10 +73,12 @@ pip install moshi<=0.2.2
 
 ### Usage
 
-You can launch the web UI by running `moshi.server`. Specify the LLM-jp-Moshi-v1 🤗 HuggingFace Hub repository using the `--hf-repo` option.
+You can launch the web UI by running `moshi.server`. Specify the 🤗 HuggingFace Hub repository of the model to use with the `--hf-repo` option.
 
 ```bash
 python -m moshi.server --hf-repo llm-jp/llm-jp-moshi-v1
+# or
+python -m moshi.server --hf-repo llm-jp/llm-jp-moshi-v1.1-base
 ```
 
 ### Tips
@@ -58,7 +89,7 @@ python -m moshi.server --hf-repo llm-jp/llm-jp-moshi-v1
 
 ## Terms of Use
 
-LLM-jp-Moshi-v1 is released under the [Apache License, Version 2.0](LICENSE). 
+The LLM-jp-Moshi models are released under the [Apache License, Version 2.0](LICENSE). 
 This model is not intended for use in malicious activities, including but not limited to impersonation or fraud. The outputs generated by this model may contain biases, inaccuracies, or inappropriate or offensive content originating from the training data.
 We assume no responsibility for any damages arising from its use.
 
@@ -66,10 +97,12 @@ We assume no responsibility for any damages arising from its use.
 ## Acknowledgments
 
 We used ABCI 3.0 provided by AIST and AIST Solutions with support from “ABCI 3.0 Development Acceleration Use”.  
-We would like to thank Kyutai Labs for releasing the original Moshi model and technical paper. We also thank the researchers who released the J-CHAT dataset.
+We would like to thank Kyutai Labs for releasing the original Moshi model and technical paper, the researchers who released the J-CHAT dataset, and the authors of PersonaPlex for proposing the Hybrid System Prompt method.
 
 
 ## Citation
+
+If you use LLM-jp-Moshi-v1, please cite the following.
 
 ```bibtex
 @inproceedings{abe2026effects,
