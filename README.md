@@ -30,7 +30,7 @@ LLM-jp-Moshiは，日本語におけるfull-duplex音声対話システムです
   - [J-CHAT](https://arxiv.org/abs/2407.15828)
   - 合成対話コーパス（15話題，93,679対話，約4,000時間．LLM-jpで独自に構築，公開に向けて準備中）
 
-v1と同じJ-CHAT事前学習チェックポイントから，LLM-jpで独自に構築した日常的な15話題をカバーする大規模な日本語合成対話コーパス（約4,000時間）のみで追加学習したモデルです．この追加学習にはLLM-jp-Zoom1を使用していません．使い方はv1と同じく`moshi.server`でそのまま対話できます（Interactive Demo参照）．
+v1と同じJ-CHAT事前学習チェックポイントから，LLM-jpで独自に構築した日常的な15話題をカバーする大規模な日本語合成対話コーパス（約4,000時間）のみで追加学習したモデルです．この追加学習にはLLM-jp-Zoom1を使用していません．
 
 ### LLM-jp-Moshi-v1.1-prompted
 - **🤗 Model:** [llm-jp/llm-jp-moshi-v1.1-prompted](https://huggingface.co/llm-jp/llm-jp-moshi-v1.1-prompted)
