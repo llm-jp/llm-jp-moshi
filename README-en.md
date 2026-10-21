@@ -28,7 +28,7 @@ This repository introduces the LLM-jp-Moshi models (v1 / v1.1-base / v1.1-prompt
 - **🤗 Model:** [llm-jp/llm-jp-moshi-v1.1-base](https://huggingface.co/llm-jp/llm-jp-moshi-v1.1-base)
 - **Training Data:**
   - [J-CHAT](https://arxiv.org/abs/2407.15828) (pre-training)
-  - Synthetic dialogue corpus (additional training: 15 topics, approx. 4,000 hours; built in-house by LLM-jp, release in preparation)
+  - Synthetic dialogue corpus (additional training: 15 topics, 93,679 dialogues, approx. 4,000 hours; built in-house by LLM-jp, release in preparation)
 
 A model trained from the same J-CHAT pre-training checkpoint as v1, with additional training only on a large-scale Japanese synthetic dialogue corpus built in-house by LLM-jp, covering 15 everyday topics (approx. 4,000 hours). LLM-jp-Zoom1 is not used in this additional training. It can be used with `moshi.server` in the same way as v1 (see Interactive Demo).
 
@@ -36,8 +36,8 @@ A model trained from the same J-CHAT pre-training checkpoint as v1, with additio
 - **🤗 Model:** [llm-jp/llm-jp-moshi-v1.1-prompted](https://huggingface.co/llm-jp/llm-jp-moshi-v1.1-prompted)
 - **Training Data:** (with topic labels and text prompts)
   - [J-CHAT](https://arxiv.org/abs/2407.15828)
-  - Synthetic dialogue corpus (15 topics, 93,679 dialogues, approx. 4,000 hours; built in-house by LLM-jp, release in preparation)
-  - LLM-jp-Zoom1
+  - Synthetic dialogue corpus (15 topics, 93,679 dialogues, approx. 4,000 hours (of which approx. 3,600 hours were used for training); built in-house by LLM-jp, release in preparation)
+  - LLM-jp-Zoom1 (online dialogue data recorded over Zoom; 1,723 dialogues, approx. 1,000 hours (of which approx. 78 hours were used for training))
 
 A model additionally trained on the synthetic dialogue corpus and LLM-jp-Zoom1, with topic text prompts attached. By providing a topic as a text prompt at the beginning of a dialogue, the model can be conditioned to start chatting about that topic. The conditioning mechanism follows the text-based topic conditioning part of the Hybrid System Prompt from [PersonaPlex](https://arxiv.org/abs/2602.06053). See the model card for prompt formats and limitations.
 
