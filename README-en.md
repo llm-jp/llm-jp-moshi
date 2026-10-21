@@ -31,7 +31,7 @@ This repository introduces the LLM-jp-Moshi models (v1 / v1.1-base / v1.1-prompt
   - Synthetic dialogue corpus (15 topics, approx. 3,600 hours; release in preparation)
   - LLM-jp-Zoom1
 
-A model trained from the same J-CHAT pre-training checkpoint as v1, with additional training on the synthetic dialogue corpus and LLM-jp-Zoom1.
+A model trained from the same J-CHAT pre-training checkpoint as v1, with additional training on a large-scale Japanese synthetic dialogue corpus covering 15 everyday topics (approx. 3,600 hours) and LLM-jp-Zoom1. The change from v1 is the expanded training data; it can be used with `moshi.server` in the same way as v1 (see Interactive Demo). It also serves as the baseline for v1.1-prompted.
 
 ### LLM-jp-Moshi-v1.1-prompted
 - **🤗 Model:** [llm-jp/llm-jp-moshi-v1.1-prompted](https://huggingface.co/llm-jp/llm-jp-moshi-v1.1-prompted)
@@ -48,20 +48,6 @@ Each repository contains the following model files:
 ## Interactive Demo
 
 You can interact with LLM-jp-Moshi-v1 and v1.1-base using the official [Moshi PyTorch implementation](https://github.com/kyutai-labs/moshi/tree/main/moshi) from Kyutai. For implementation details, please refer to the original Moshi repository [kyutai-labs/moshi](https://github.com/kyutai-labs/moshi).
-
-> [!NOTE]
-> v1.1-prompted does not work with `moshi.server`, as it requires a dedicated inference implementation that supports text-prompt prefill. A compatible server is included in this repository under [`inference/`](inference/).
-
-To interact with v1.1-prompted:
-
-```bash
-cd inference
-pip install -r requirements.txt
-python server.py --hf-repo llm-jp/llm-jp-moshi-v1.1-prompted
-```
-
-Open `http://localhost:8998/` in your browser, edit the topic prompt in the input field at the top of the screen, and press 接続 (connect) to start the conversation.
-See [`inference/README.md`](inference/README.md) for options.
 
 ### Installation
 
@@ -80,6 +66,20 @@ python -m moshi.server --hf-repo llm-jp/llm-jp-moshi-v1
 # or
 python -m moshi.server --hf-repo llm-jp/llm-jp-moshi-v1.1-base
 ```
+
+### Interacting with v1.1-prompted
+
+> [!NOTE]
+> v1.1-prompted does not work with `moshi.server`, as it requires a dedicated inference implementation that supports text-prompt prefill. A compatible server is included in this repository under [`inference/`](inference/).
+
+```bash
+cd inference
+pip install -r requirements.txt
+python server.py --hf-repo llm-jp/llm-jp-moshi-v1.1-prompted
+```
+
+Open `http://localhost:8998/` in your browser, edit the topic prompt in the input field at the top of the screen, and press 接続 (connect) to start the conversation.
+See [`inference/README.md`](inference/README.md) for options.
 
 ### Tips
 

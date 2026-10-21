@@ -31,7 +31,7 @@ LLM-jp-Moshiは，日本語におけるfull-duplex音声対話システムです
   - 合成対話コーパス（15話題，約3,600時間．公開に向けて準備中）
   - LLM-jp-Zoom1
 
-v1と同じJ-CHAT事前学習チェックポイントから，合成対話コーパスとLLM-jp-Zoom1で追加学習したモデルです．
+v1と同じJ-CHAT事前学習チェックポイントから，日常的な15話題をカバーする大規模な日本語合成対話コーパス（約3,600時間）とLLM-jp-Zoom1で追加学習したモデルです．v1からの変更点は追加学習データの拡充で，使い方はv1と同じく`moshi.server`でそのまま対話できます（Interactive Demo参照）．v1.1-promptedのベースラインとしても位置づけられます．
 
 ### LLM-jp-Moshi-v1.1-prompted
 - **🤗 Model:** [llm-jp/llm-jp-moshi-v1.1-prompted](https://huggingface.co/llm-jp/llm-jp-moshi-v1.1-prompted)
@@ -48,20 +48,6 @@ v1.1-baseと同一のデータに話題のテキストプロンプトを付与�
 ## Interactive Demo
 
 Kyutai公式の[MoshiのPyTorch実装](https://github.com/kyutai-labs/moshi/tree/main/moshi)を用いて，LLM-jp-Moshi-v1およびv1.1-baseと対話することができます．実装の詳細は，オリジナルMoshiのリポジトリ [kyutai-labs/moshi](https://github.com/kyutai-labs/moshi) を参照してください．
-
-> [!NOTE]
-> v1.1-promptedは，テキストプロンプトの前置（prefill）に対応した専用の推論実装が必要なため，`moshi.server`では動作しません．本リポジトリの [`inference/`](inference/) に対応サーバを同梱しています．
-
-v1.1-promptedと対話する場合:
-
-```bash
-cd inference
-pip install -r requirements.txt
-python server.py --hf-repo llm-jp/llm-jp-moshi-v1.1-prompted
-```
-
-ブラウザで `http://localhost:8998/` を開き，画面上部の入力欄で話題プロンプトを編集して「接続」を押します．
-オプションは [`inference/README.md`](inference/README.md) を参照してください．
 
 ### Installation
 
@@ -80,6 +66,20 @@ python -m moshi.server --hf-repo llm-jp/llm-jp-moshi-v1
 # または
 python -m moshi.server --hf-repo llm-jp/llm-jp-moshi-v1.1-base
 ```
+
+### v1.1-promptedと対話する場合
+
+> [!NOTE]
+> v1.1-promptedは，テキストプロンプトの前置（prefill）に対応した専用の推論実装が必要なため，`moshi.server`では動作しません．本リポジトリの [`inference/`](inference/) に対応サーバを同梱しています．
+
+```bash
+cd inference
+pip install -r requirements.txt
+python server.py --hf-repo llm-jp/llm-jp-moshi-v1.1-prompted
+```
+
+ブラウザで `http://localhost:8998/` を開き，画面上部の入力欄で話題プロンプトを編集して「接続」を押します．
+オプションは [`inference/README.md`](inference/README.md) を参照してください．
 
 ### Tips
 
