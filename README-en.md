@@ -78,8 +78,7 @@ python -m moshi.server --hf-repo llm-jp/llm-jp-moshi-v1.1-base
 python inference/server.py --hf-repo llm-jp/llm-jp-moshi-v1.1-prompted
 ```
 
-Open `http://localhost:8998/` in your browser, edit the topic prompt in the input field at the top of the screen, and press 接続 (connect) to start the conversation.
-The prompt can also be specified via the `?text_prompt=` query at connection time, or with the `--prompt-file` / `--prompt-mode` options (e.g., random selection from a prompt set).
+Select a topic prompt (presets for the 15 trained topics) at the top of the screen and press 接続 (connect) to start the conversation.
 
 ### Tips
 
