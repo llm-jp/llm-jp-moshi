@@ -79,7 +79,7 @@ python inference/server.py --hf-repo llm-jp/llm-jp-moshi-v1.1-prompted
 ```
 
 ブラウザで `http://localhost:8998/` を開き，画面上部の入力欄で話題プロンプトを編集して「接続」を押します．
-オプションは [`inference/README.md`](inference/README.md) を参照してください．
+プロンプトは接続時の `?text_prompt=` クエリや，`--prompt-file` / `--prompt-mode` オプション（集合からのランダム選択等）でも指定できます．
 
 ### Tips
 

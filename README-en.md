@@ -79,7 +79,7 @@ python inference/server.py --hf-repo llm-jp/llm-jp-moshi-v1.1-prompted
 ```
 
 Open `http://localhost:8998/` in your browser, edit the topic prompt in the input field at the top of the screen, and press 接続 (connect) to start the conversation.
-See [`inference/README.md`](inference/README.md) for options.
+The prompt can also be specified via the `?text_prompt=` query at connection time, or with the `--prompt-file` / `--prompt-mode` options (e.g., random selection from a prompt set).
 
 ### Tips
 
