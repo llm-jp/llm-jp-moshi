@@ -46,6 +46,8 @@ v1と同じJ-CHAT事前学習チェックポイントから，LLM-jpで独自に
 - `tokenizer_spm_32k_3.model` - テキストトークナイザ（[rinna/japanese-gpt2-medium](https://huggingface.co/rinna/japanese-gpt2-medium)の日本語SentencePieceモデル）
 - `tokenizer-e351c8d8-checkpoint125.safetensors` - 音声トークナイザ（[kyutai/moshiko-pytorch-bf16](https://huggingface.co/kyutai/moshiko-pytorch-bf16)のMimiモデル）
 
+v1.1-promptedのリポジトリには，加えてプロンプト前置用の `prefix_tokens.npz` が含まれます．
+
 
 ## Interactive Demo
 

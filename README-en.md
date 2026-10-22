@@ -46,6 +46,8 @@ Each repository contains the following model files:
 - `tokenizer_spm_32k_3.model` - Text tokenizer (Japanese SentencePiece model from [rinna/japanese-gpt2-medium](https://huggingface.co/rinna/japanese-gpt2-medium))
 - `tokenizer-e351c8d8-checkpoint125.safetensors` - Audio tokenizer (Mimi model from [kyutai/moshiko-pytorch-bf16](https://huggingface.co/kyutai/moshiko-pytorch-bf16))
 
+The v1.1-prompted repository additionally contains `prefix_tokens.npz`, used for prompt prefilling.
+
 
 ## Interactive Demo
 
