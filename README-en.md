@@ -75,9 +75,7 @@ python -m moshi.server --hf-repo llm-jp/llm-jp-moshi-v1.1-base
 > v1.1-prompted does not work with `moshi.server`, as it requires a dedicated inference implementation that supports text-prompt prefill. A compatible server is included in this repository under [`inference/`](inference/).
 
 ```bash
-cd inference
-pip install -r requirements.txt
-python server.py --hf-repo llm-jp/llm-jp-moshi-v1.1-prompted
+python inference/server.py --hf-repo llm-jp/llm-jp-moshi-v1.1-prompted
 ```
 
 Open `http://localhost:8998/` in your browser, edit the topic prompt in the input field at the top of the screen, and press 接続 (connect) to start the conversation.

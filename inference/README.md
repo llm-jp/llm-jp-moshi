@@ -10,10 +10,10 @@ LLM-jp-Moshi-v1.1-prompted と対話するためのWebサーバです．テキ�
 
 ## Installation
 
-Python 3.12 での動作を確認しています．
+Python 3.10以上が必要です．
 
 ```bash
-pip install -r requirements.txt
+pip install moshi<=0.2.2
 ```
 
 ## Usage

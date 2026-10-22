@@ -1,5 +1,0 @@
-moshi==0.1.0
-aiohttp
-sentencepiece
-numpy
-torch

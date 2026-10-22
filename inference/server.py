@@ -472,7 +472,7 @@ def main():
     log("info", "loading moshi")
     if args.moshi_weight is None:
         args.moshi_weight = hf_hub_download(args.hf_repo, loaders.MOSHI_NAME)
-    lm = loaders.get_moshi_lm(args.moshi_weight, args.device)
+    lm = loaders.get_moshi_lm(args.moshi_weight, device=args.device)
     if args.prefix_tokens_npz is None:
         args.prefix_tokens_npz = hf_hub_download(args.hf_repo, "prefix_tokens.npz")
 
