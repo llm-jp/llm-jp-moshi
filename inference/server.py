@@ -20,7 +20,7 @@ def log(level: str, msg: str):
     print(make_log(level, msg))
 
 
-MODEL_NAME = "LLM-jp-Moshi-v1.1-prompted"
+MODEL_NAME = "LLM-jp-Moshi-v1.1-topic-prompted"
 
 TOPICAL_PROMPTS = [
  "最近ハマっている趣味や休日の過ごし方の話から始めて、相手に質問しながら雑談します。",
@@ -102,9 +102,9 @@ button:disabled{opacity:.4;cursor:default}
   </div>
   <div class="card" id="promptcard">
     <div class="lb mono">テキストプロンプト</div>
-    <div class="nt">会話開始前にモデルへ流し込む話題の指示。プリセットの逐語使用を推奨。
-      大文字英字・全角数字は語彙に無いので使わない。空欄なら prefill 無しで動く。</div>
-    <select id="preset"><option value="">プリセット（学習済み15話題・逐語）</option></select>
+    <div class="nt">会話開始前にモデルへ渡す話題の指示。対応しているのはプリセットの15話題のみ。
+      大文字英字・全角数字は語彙に無いので使わない。空欄なら条件づけ無しで動く。</div>
+    <select id="preset"><option value="">プリセット（学習済み15話題）</option></select>
     <textarea id="ptext"></textarea>
   </div>
   <div class="frame">
@@ -453,7 +453,7 @@ def main():
     parser.add_argument("--moshi-weight", type=str)
     parser.add_argument("--mimi-weight", type=str)
     parser.add_argument("--prefix-tokens-npz", type=str)
-    parser.add_argument("--hf-repo", type=str, default="llm-jp/llm-jp-moshi-v1.1-prompted")
+    parser.add_argument("--hf-repo", type=str, default="llm-jp/llm-jp-moshi-v1.1-topic-prompted")
     parser.add_argument("--default-prompt", type=str, default=DEFAULT_PROMPT)
     parser.add_argument("--prompt", action="append", default=[])
     parser.add_argument("--prompt-file", type=str, default=None)

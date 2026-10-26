@@ -10,7 +10,7 @@
 
 LLM-jp-Moshi is a full-duplex spoken dialogue system for Japanese. Built upon the English 7B-parameter full-duplex spoken dialogue model [Moshi](https://arxiv.org/abs/2410.00037), it was developed through additional training on Japanese spoken dialogue data.
 
-This repository introduces the LLM-jp-Moshi models (v1 / v1.1-base / v1.1-prompted).
+This repository introduces the LLM-jp-Moshi models (v1 / v1.1-base / v1.1-topic-prompted).
 
 > [!NOTE]
 > These models are prototypes and their responses may be unnatural.
@@ -30,28 +30,32 @@ This repository introduces the LLM-jp-Moshi models (v1 / v1.1-base / v1.1-prompt
   - [J-CHAT](https://arxiv.org/abs/2407.15828)
   - Synthetic dialogue corpus (15 topics, 93,679 dialogues, approx. 4,000 hours; built in-house by LLM-jp, release in preparation)
 
-A model trained from the same J-CHAT pre-training checkpoint as v1, with additional training only on a large-scale Japanese synthetic dialogue corpus built in-house by LLM-jp, covering 15 everyday topics (approx. 4,000 hours). LLM-jp-Zoom1 is not used in this additional training.
+A model trained from the same J-CHAT pre-training checkpoint as v1, with additional training only on a large-scale Japanese synthetic dialogue corpus built in-house by LLM-jp, covering 15 everyday topics (approx. 4,000 hours).
 
-### LLM-jp-Moshi-v1.1-prompted
-- **🤗 Model:** [llm-jp/llm-jp-moshi-v1.1-prompted](https://huggingface.co/llm-jp/llm-jp-moshi-v1.1-prompted)
+### LLM-jp-Moshi-v1.1-topic-prompted
+- **🤗 Model:** [llm-jp/llm-jp-moshi-v1.1-topic-prompted](https://huggingface.co/llm-jp/llm-jp-moshi-v1.1-topic-prompted)
 - **Training Data:** (with topic labels and text prompts)
   - [J-CHAT](https://arxiv.org/abs/2407.15828)
-  - Synthetic dialogue corpus (15 topics, 93,679 dialogues, approx. 4,000 hours (of which approx. 3,600 hours were used for training); built in-house by LLM-jp, release in preparation)
-  - LLM-jp-Zoom1 (online dialogue data recorded over Zoom; 1,723 dialogues, approx. 1,000 hours (of which approx. 78 hours were used for training))
+  - Synthetic dialogue corpus (15 topics, 93,679 dialogues, approx. 4,000 hours; built in-house by LLM-jp, release in preparation)
+  - LLM-jp-Zoom1 (online dialogue data recorded over Zoom; 1,723 dialogues, approx. 1,000 hours)
 
 A model additionally trained on the synthetic dialogue corpus and LLM-jp-Zoom1, with topic text prompts attached. By providing a topic as a text prompt at the beginning of a dialogue, the model can be conditioned to start chatting about that topic. The conditioning mechanism follows the text-based topic conditioning part of the Hybrid System Prompt from [PersonaPlex](https://arxiv.org/abs/2602.06053). See the model card for prompt formats and limitations.
+
+Each training example is capped at about 164 seconds. As a result, the amounts actually used for training are approx. 3,600 hours of the synthetic corpus and approx. 78 hours of LLM-jp-Zoom1, for which only the beginning of each dialogue is used because the recordings are long (about 32 minutes on average).
+
+The speech in the synthetic dialogue corpus used by v1.1-base and v1.1-topic-prompted was generated with a text-to-speech model fine-tuned on LLM-jp-Zoom1.
 
 Each repository contains the following model files:
 - `model.safetensors` - The main model weights
 - `tokenizer_spm_32k_3.model` - Text tokenizer (Japanese SentencePiece model from [rinna/japanese-gpt2-medium](https://huggingface.co/rinna/japanese-gpt2-medium))
 - `tokenizer-e351c8d8-checkpoint125.safetensors` - Audio tokenizer (Mimi model from [kyutai/moshiko-pytorch-bf16](https://huggingface.co/kyutai/moshiko-pytorch-bf16))
 
-The v1.1-prompted repository additionally contains `prefix_tokens.npz`, used for prompt prefilling.
+The v1.1-topic-prompted repository additionally contains `prefix_tokens.npz`, used for text-prompt conditioning.
 
 
 ## Interactive Demo
 
-You can interact with LLM-jp-Moshi-v1 and v1.1-base using the official [Moshi PyTorch implementation](https://github.com/kyutai-labs/moshi/tree/main/moshi) from Kyutai. For implementation details, please refer to the original Moshi repository [kyutai-labs/moshi](https://github.com/kyutai-labs/moshi).
+This section describes how to interact with each of the LLM-jp-Moshi models. For v1 and v1.1-base, you can use the official [Moshi PyTorch implementation](https://github.com/kyutai-labs/moshi/tree/main/moshi) from Kyutai as is (see the original Moshi repository [kyutai-labs/moshi](https://github.com/kyutai-labs/moshi) for implementation details). v1.1-topic-prompted requires a dedicated inference server, so the procedure differs (see below).
 
 ### Installation
 
@@ -71,13 +75,13 @@ python -m moshi.server --hf-repo llm-jp/llm-jp-moshi-v1
 python -m moshi.server --hf-repo llm-jp/llm-jp-moshi-v1.1-base
 ```
 
-#### Interacting with v1.1-prompted
+#### Interacting with v1.1-topic-prompted
 
 > [!NOTE]
-> v1.1-prompted does not work with `moshi.server`, as it requires a dedicated inference implementation that supports text-prompt prefill. A compatible server is included in this repository under [`inference/`](inference/).
+> v1.1-topic-prompted does not work with `moshi.server`, as it requires a dedicated inference implementation that supports text-prompt conditioning. A compatible server is included in this repository under [`inference/`](inference/).
 
 ```bash
-python inference/server.py --hf-repo llm-jp/llm-jp-moshi-v1.1-prompted
+python inference/server.py --hf-repo llm-jp/llm-jp-moshi-v1.1-topic-prompted
 ```
 
 Select a topic prompt (presets for the 15 trained topics) at the top of the screen and press 接続 (connect) to start the conversation.
@@ -98,7 +102,7 @@ We assume no responsibility for any damages arising from its use.
 ## Acknowledgments
 
 We used ABCI 3.0 provided by AIST and AIST Solutions with support from “ABCI 3.0 Development Acceleration Use”.  
-We would like to thank Kyutai Labs for releasing the original Moshi model and technical paper, the researchers who released the J-CHAT dataset, and the authors of PersonaPlex for proposing the Hybrid System Prompt method.
+We would like to thank Kyutai Labs for releasing the original Moshi model and technical paper. We also thank the researchers who released the J-CHAT dataset.
 
 
 ## Citation
