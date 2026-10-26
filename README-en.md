@@ -30,7 +30,11 @@ This repository introduces the LLM-jp-Moshi models (v1 / v1.1-base / v1.1-prompt
   - [J-CHAT](https://arxiv.org/abs/2407.15828) (pre-training)
   - Synthetic dialogue corpus (additional training: 15 topics, approx. 4,000 hours; built in-house by LLM-jp, release in preparation)
 
-A model trained from the same J-CHAT pre-training checkpoint as v1, with additional training only on a large-scale Japanese synthetic dialogue corpus built in-house by LLM-jp, covering 15 everyday topics (approx. 4,000 hours). LLM-jp-Zoom1 is not used in this additional training. It can be used with `moshi.server` in the same way as v1 (see Interactive Demo).
+A model trained from the same J-CHAT pre-training checkpoint as v1, with additional training only on a large-scale Japanese synthetic dialogue corpus built in-house by LLM-jp, covering 15 everyday topics (approx. 4,000 hours).
+
+Real dialogue audio from LLM-jp-Zoom1 is not mixed into the inputs for this additional Moshi training. However, the synthetic audio is generated using FireRedTTS-2 fine-tuned on LLM-jp-Zoom1, and selected excerpts from LLM-jp-Zoom1 are also used as reference audio for the system-side speaker during synthesis.
+
+It can be used with `moshi.server` in the same way as v1 (see Interactive Demo).
 
 ### LLM-jp-Moshi-v1.1-prompted
 - **🤗 Model:** [llm-jp/llm-jp-moshi-v1.1-prompted](https://huggingface.co/llm-jp/llm-jp-moshi-v1.1-prompted)
@@ -49,17 +53,17 @@ Each repository contains the following model files:
 
 ## Interactive Demo
 
-You can interact with LLM-jp-Moshi-v1 and v1.1-base using the official [Moshi PyTorch implementation](https://github.com/kyutai-labs/moshi/tree/main/moshi) from Kyutai. For implementation details, please refer to the original Moshi repository [kyutai-labs/moshi](https://github.com/kyutai-labs/moshi).
+This section explains how to interact with all three models: LLM-jp-Moshi-v1, v1.1-base, and v1.1-prompted. For v1 and v1.1-base, use `moshi.server` from Kyutai's official [Moshi PyTorch implementation](https://github.com/kyutai-labs/moshi/tree/main/moshi). For v1.1-prompted, use the dedicated server included in this repository. The respective instructions are provided below.
 
-### Installation
+### Installation for v1 / v1.1-base
 
 Python 3.10 or higher is required.
 
 ```bash
-pip install moshi<=0.2.2
+pip install 'moshi<=0.2.2'
 ```
 
-### Usage
+### Running v1 / v1.1-base
 
 You can launch the web UI by running `moshi.server`. Specify the 🤗 HuggingFace Hub repository of the model to use with the `--hf-repo` option.
 
@@ -99,7 +103,7 @@ We assume no responsibility for any damages arising from its use.
 ## Acknowledgments
 
 We used ABCI 3.0 provided by AIST and AIST Solutions with support from “ABCI 3.0 Development Acceleration Use”.  
-We would like to thank Kyutai Labs for releasing the original Moshi model and technical paper, the researchers who released the J-CHAT dataset, and the authors of PersonaPlex for proposing the Hybrid System Prompt method.
+We would like to thank Kyutai Labs for releasing the original Moshi model and technical paper, and the researchers who released the J-CHAT dataset.
 
 
 ## Citation

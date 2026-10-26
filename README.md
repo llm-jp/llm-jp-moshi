@@ -30,7 +30,11 @@ LLM-jp-Moshiは，日本語におけるfull-duplex音声対話システムです
   - [J-CHAT](https://arxiv.org/abs/2407.15828)（事前学習）
   - 合成対話コーパス（追加学習：15話題，約4,000時間．LLM-jpで独自に構築，公開に向けて準備中）
 
-v1と同じJ-CHAT事前学習チェックポイントから，LLM-jpで独自に構築した日常的な15話題をカバーする大規模な日本語合成対話コーパス（約4,000時間）のみで追加学習したモデルです．この追加学習にはLLM-jp-Zoom1を使用していません．使い方はv1と同じく`moshi.server`でそのまま対話できます（Interactive Demo参照）．
+v1と同じJ-CHAT事前学習チェックポイントから，LLM-jpで独自に構築した日常的な15話題をカバーする大規模な日本語合成対話コーパス（約4,000時間）のみで追加学習したモデルです．
+
+Moshiへの追加学習入力としてLLM-jp-Zoom1の実対話音声を混合していません．ただし，合成音声の生成にはLLM-jp-Zoom1でファインチューニングしたFireRedTTS-2を使用し，合成時のシステム側話者の参照音声にもLLM-jp-Zoom1から抜粋した一部の音声を使用しています．
+
+使い方はv1と同じく`moshi.server`でそのまま対話できます（Interactive Demo参照）．
 
 ### LLM-jp-Moshi-v1.1-prompted
 - **🤗 Model:** [llm-jp/llm-jp-moshi-v1.1-prompted](https://huggingface.co/llm-jp/llm-jp-moshi-v1.1-prompted)
@@ -49,17 +53,17 @@ v1と同じJ-CHAT事前学習チェックポイントから，LLM-jpで独自に
 
 ## Interactive Demo
 
-Kyutai公式の[MoshiのPyTorch実装](https://github.com/kyutai-labs/moshi/tree/main/moshi)を用いて，LLM-jp-Moshi-v1およびv1.1-baseと対話することができます．実装の詳細は，オリジナルMoshiのリポジトリ [kyutai-labs/moshi](https://github.com/kyutai-labs/moshi) を参照してください．
+ここでは，LLM-jp-Moshi-v1，v1.1-base，v1.1-promptedの3モデルとの対話方法を紹介します．v1とv1.1-baseにはKyutai公式の[MoshiのPyTorch実装](https://github.com/kyutai-labs/moshi/tree/main/moshi)の`moshi.server`を使用し，v1.1-promptedには本リポジトリの専用サーバを使用します．それぞれの実行方法を以下に示します．
 
-### Installation
+### v1 / v1.1-baseのインストール
 
 Python 3.10以上が必要です．
 
 ```bash
-pip install moshi<=0.2.2
+pip install 'moshi<=0.2.2'
 ```
 
-### Usage
+### v1 / v1.1-baseの起動
 
 `moshi.server`を実行することで，対話用のweb UIを起動できます．`--hf-repo`オプションで使用するモデルの 🤗HuggingFace Hubリポジトリを指定してください．
 
@@ -99,7 +103,7 @@ LLM-jp-Moshiの各モデルは [Apache License, Version 2.0](LICENSE) の下で�
 ## Acknowledgments
 
 本研究では，国立研究開発法人産業技術総合研究所および株式会社AIST Solutionsが提供するAI橋渡しクラウド（ABCI）3.0を，「ABCI 3.0開発加速利用」の支援を受けて実施しました．
-また，ベースモデルであるMoshiおよびテクニカルペーパーを公開されたKyutai Labs，J-CHATデータセットを公開された研究者の皆様，ならびにHybrid System Prompt手法を提案されたPersonaPlexの著者の皆様に深く感謝の意を表します．
+また，ベースモデルであるMoshiおよびテクニカルペーパーを公開されたKyutai Labs，ならびにJ-CHATデータセットを公開された研究者の皆様に深く感謝の意を表します．
 
 
 ## Citation
