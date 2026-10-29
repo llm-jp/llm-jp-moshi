@@ -68,7 +68,7 @@
 
     <p class="mt-3">
       <span lang="ja" class="active-lang">
-        LLM-jp-Moshi-v1.1 は，<a href="../">LLM-jp-Moshi-v1</a> と同じ J-CHAT 事前学習チェックポイントから，LLM-jp で独自に構築した日本語の合成対話コーパス（15 話題，約 4,000 時間）を用いて追加学習したモデル群です．
+        LLM-jp-Moshi-v1.1 は，<a href="../">LLM-jp-Moshi-v1</a> と同じ J-CHAT 事前学習チェックポイントから，LLM-jp で独自に構築した日本語の合成対話コーパス（15 話題，約 4,000 時間）と LLM-jp-Zoom1 を用いて追加学習したモデル群です．
         合成対話コーパスの音声は，LLM-jp-Zoom1 でファインチューニングした音声合成モデルで生成しています．
         このページでは，各モデルとユーザによる実際の音声対話のデモ動画と，<a href="https://spoken-dialogue-arena.vercel.app/">Spoken Dialogue Arena</a> による評価結果を紹介します．
         モデルの詳細と使い方は <a href="https://github.com/llm-jp/llm-jp-moshi">GitHub</a> をご覧ください．
@@ -76,7 +76,7 @@
       <span lang="en">
         LLM-jp-Moshi-v1.1 is a family of models trained from the same J-CHAT pre-training checkpoint as
         <a href="../">LLM-jp-Moshi-v1</a>, with additional training on a large-scale Japanese synthetic dialogue corpus
-        built in-house by LLM-jp (15 everyday topics, approx. 4,000 hours). The speech in the synthetic corpus was
+        built in-house by LLM-jp (15 everyday topics, approx. 4,000 hours) and LLM-jp-Zoom1. The speech in the synthetic corpus was
         generated with a text-to-speech model fine-tuned on LLM-jp-Zoom1.
         This page presents demo videos of real-time spoken dialogue between each model and users, and evaluation
         results from the <a href="https://spoken-dialogue-arena.vercel.app/">Spoken Dialogue Arena</a>.
@@ -91,31 +91,19 @@
     <h3 lang="ja">モデル</h3>
     <h3 lang="en">Models</h3>
     <div class="row g-4 mt-1">
-      <div class="col-12 col-md-4">
+      <div class="col-12 col-md-6">
         <div class="card h-100 model-card">
           <div class="card-body">
             <h5 class="card-title">LLM-jp-Moshi-v1.1-base</h5>
-            <p class="card-text" lang="ja">J-CHAT で事前学習したチェックポイントから，合成対話コーパス（約 4,000 時間）のみで追加学習したモデル．</p>
-            <p class="card-text" lang="en">Additionally trained on the synthetic dialogue corpus only (approx. 4,000
-              hours), starting from the J-CHAT pre-training checkpoint.</p>
+            <p class="card-text" lang="ja">J-CHAT で事前学習したチェックポイントから，合成対話コーパス（約 4,000 時間）と LLM-jp-Zoom1 を混ぜて追加学習したモデル．</p>
+            <p class="card-text" lang="en">Additionally trained on the synthetic dialogue corpus (approx. 4,000 hours)
+              mixed with LLM-jp-Zoom1, starting from the J-CHAT pre-training checkpoint.</p>
             <a href="https://huggingface.co/llm-jp/llm-jp-moshi-v1.1-base" class="btn btn-primary btn-sm">🤗 Hugging
               Face</a>
           </div>
         </div>
       </div>
-      <div class="col-12 col-md-4">
-        <div class="card h-100 model-card">
-          <div class="card-body">
-            <h5 class="card-title">LLM-jp-Moshi-v1.1-base-mix</h5>
-            <p class="card-text" lang="ja">合成対話コーパスに LLM-jp-Zoom1 を混ぜて追加学習したモデル．</p>
-            <p class="card-text" lang="en">Additionally trained on the synthetic dialogue corpus mixed with
-              LLM-jp-Zoom1.</p>
-            <a href="https://huggingface.co/llm-jp" class="btn btn-outline-primary btn-sm" lang="ja">🤗 公開準備中</a>
-            <a href="https://huggingface.co/llm-jp" class="btn btn-outline-primary btn-sm" lang="en">🤗 Coming soon</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-12 col-md-4">
+      <div class="col-12 col-md-6">
         <div class="card h-100 model-card">
           <div class="card-body">
             <h5 class="card-title">LLM-jp-Moshi-v1.1-topic-prompted</h5>
@@ -208,10 +196,13 @@
     </div>
     <p class="mt-3 text-muted" style="font-size: 0.9rem;" lang="ja">
       2026 年 10 月 29 日時点．対戦は各対 10〜11 票，右図の n は評価された対話数．票数が少ないため，1 票で選好率が約 10 ポイント動くことに注意してください．
+      「（参考）合成コーパスのみで学習」は，LLM-jp-Zoom1 を混ぜずに合成対話コーパスだけで追加学習した比較用のモデルで，公開はしていません．
     </p>
     <p class="mt-3 text-muted" style="font-size: 0.9rem;" lang="en">
       As of October 29, 2026. Each pairing has 10–11 votes; n in the right panel is the number of rated conversations.
       Note that with this few votes, a single vote shifts the preference rate by about 10 points.
+      "（参考）合成コーパスのみで学習" (reference: synthetic corpus only) is an unreleased comparison model additionally
+      trained on the synthetic dialogue corpus without LLM-jp-Zoom1.
     </p>
   </div>
 
@@ -228,8 +219,7 @@
     $(document).ready(function () {
       const videoDir = '../static/video/20261029/';
       const groups = [
-        { ja: 'LLM-jp-Moshi-v1.1-base', en: 'LLM-jp-Moshi-v1.1-base', files: ['v1.1-base-1.mp4', 'v1.1-base-2.mp4', 'v1.1-base-3.mp4'] },
-        { ja: 'LLM-jp-Moshi-v1.1-base-mix', en: 'LLM-jp-Moshi-v1.1-base-mix', files: ['v1.1-base-mix-1.mp4', 'v1.1-base-mix-2.mp4'] },
+        { ja: 'LLM-jp-Moshi-v1.1-base', en: 'LLM-jp-Moshi-v1.1-base', files: ['v1.1-base-1.mp4', 'v1.1-base-2.mp4'] },
         { ja: 'LLM-jp-Moshi-v1.1-topic-prompted', en: 'LLM-jp-Moshi-v1.1-topic-prompted', files: ['v1.1-topic-prompted-1.mp4', 'v1.1-topic-prompted-2.mp4', 'v1.1-topic-prompted-3.mp4', 'v1.1-topic-prompted-4.mp4', 'v1.1-topic-prompted-5.mp4'] },
       ];
       groups.forEach(g => {
