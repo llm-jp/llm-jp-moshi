@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>LLM-jp-Moshi-v1.1</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="../static/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/png" href="../static/image/LLM-jp-Moshi.png">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <style>
+    .ratio-2x1 {
+      --bs-aspect-ratio: 50%;
+    }
+
+    .model-card h5 {
+      color: #595959;
+    }
+
+    .video-label {
+      font-size: 0.9rem;
+      color: #6c757d;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Language Switcher -->
+  <div class="lang-switch">
+    <div class="btn-group" role="group" aria-label="Language switcher">
+      <button type="button" class="btn btn-primary lang-btn" data-lang="ja">日本語</button>
+      <button type="button" class="btn btn-outline-primary lang-btn" data-lang="en">English</button>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <div class="container pt-5 mt-5 shadow p-5 mb-5 bg-white rounded">
+    <div class="text-center header-section">
+      <div class="d-flex align-items-center justify-content-center mb-2">
+        <img src="../static/image/LLM-jp-Moshi.png" alt="LLM-jp-Moshi Logo" class="me-3"
+          style="max-width: 80px; height: auto;">
+        <div>
+          <h2 lang="ja" class="active-lang mb-0">LLM-jp-Moshi-v1.1: 日本語Full-duplex音声対話モデル</h2>
+          <h2 lang="en" class="inactive-lang mb-0">LLM-jp-Moshi-v1.1: Japanese Full-duplex Spoken Dialogue Models</h2>
+        </div>
+      </div>
+      <p class="lead fw-bold">
+        <a href="https://huggingface.co/llm-jp/llm-jp-moshi-v1.1-base"
+          class="btn border-white bg-white fw-bold header-link">🤗 v1.1-base</a>
+        <a href="https://huggingface.co/llm-jp/llm-jp-moshi-v1.1-topic-prompted"
+          class="btn border-white bg-white fw-bold header-link">🤗 v1.1-topic-prompted</a>
+        |
+        <a href="https://github.com/llm-jp/llm-jp-moshi" class="btn border-white bg-white fw-bold header-link"><i
+            class="fa-brands fa-github me-2"></i>GitHub</a>
+        |
+        <a href="../" class="btn border-white bg-white fw-bold header-link" lang="ja"><i
+            class="bi bi-arrow-left me-1"></i>LLM-jp-Moshi-v1 のページ</a>
+        <a href="../" class="btn border-white bg-white fw-bold header-link" lang="en"><i
+            class="bi bi-arrow-left me-1"></i>LLM-jp-Moshi-v1 page</a>
+      </p>
+      <p class="mt-3" lang="ja">国立情報学研究所 大規模言語モデル研究開発センター <a href="../#dialogue-wg">対話ワーキンググループ</a></p>
+      <p class="mt-3" lang="en"><a href="../#dialogue-wg">Dialogue Working Group</a>, Research and Development Center
+        for Large Language Models, National Institute of Informatics</p>
+    </div>
+
+    <p class="mt-3">
+      <span lang="ja" class="active-lang">
+        LLM-jp-Moshi-v1.1 は，<a href="../">LLM-jp-Moshi-v1</a> と同じ J-CHAT 事前学習チェックポイントから，LLM-jp で独自に構築した日本語の合成対話コーパス（15 話題，約 4,000 時間）と LLM-jp-Zoom1 を用いて追加学習したモデル群です．
+        合成対話コーパスの音声は，LLM-jp-Zoom1 でファインチューニングした音声合成モデルで生成しています．
+        このページでは，各モデルとユーザによる実際の音声対話のデモ動画と，<a href="https://spoken-dialogue-arena.vercel.app/">Spoken Dialogue Arena</a> による評価結果を紹介します．
+        モデルの詳細と使い方は <a href="https://github.com/llm-jp/llm-jp-moshi">GitHub</a> をご覧ください．
+      </span>
+      <span lang="en">
+        LLM-jp-Moshi-v1.1 is a family of models trained from the same J-CHAT pre-training checkpoint as
+        <a href="../">LLM-jp-Moshi-v1</a>, with additional training on a large-scale Japanese synthetic dialogue corpus
+        built in-house by LLM-jp (15 everyday topics, approx. 4,000 hours) and LLM-jp-Zoom1. The speech in the synthetic corpus was
+        generated with a text-to-speech model fine-tuned on LLM-jp-Zoom1.
+        This page presents demo videos of real-time spoken dialogue between each model and users, and evaluation
+        results from the <a href="https://spoken-dialogue-arena.vercel.app/">Spoken Dialogue Arena</a>.
+        See <a href="https://github.com/llm-jp/llm-jp-moshi">GitHub</a> for model details and usage.
+      </span>
+    </p>
+  </div>
+
+
+  <!-- Models -->
+  <div class="container shadow p-5 mb-5 bg-white rounded">
+    <h3 lang="ja">モデル</h3>
+    <h3 lang="en">Models</h3>
+    <div class="row g-4 mt-1">
+      <div class="col-12 col-md-6">
+        <div class="card h-100 model-card">
+          <div class="card-body">
+            <h5 class="card-title">LLM-jp-Moshi-v1.1-base</h5>
+            <p class="card-text" lang="ja">J-CHAT で事前学習したチェックポイントから，合成対話コーパス（約 4,000 時間）と LLM-jp-Zoom1 を混ぜて追加学習したモデル．</p>
+            <p class="card-text" lang="en">Additionally trained on the synthetic dialogue corpus (approx. 4,000 hours)
+              mixed with LLM-jp-Zoom1, starting from the J-CHAT pre-training checkpoint.</p>
+            <a href="https://huggingface.co/llm-jp/llm-jp-moshi-v1.1-base" class="btn btn-primary btn-sm">🤗 Hugging
+              Face</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-6">
+        <div class="card h-100 model-card">
+          <div class="card-body">
+            <h5 class="card-title">LLM-jp-Moshi-v1.1-topic-prompted</h5>
+            <p class="card-text" lang="ja">合成対話コーパスと LLM-jp-Zoom1 に話題のテキストプロンプトを付与して追加学習したモデル．対話の冒頭で話題を与えると，その話題から雑談を始めます．</p>
+            <p class="card-text" lang="en">Additionally trained on the synthetic corpus and LLM-jp-Zoom1 with topic
+              text prompts. Given a topic at the beginning of a dialogue, the model starts chatting about it.</p>
+            <a href="https://huggingface.co/llm-jp/llm-jp-moshi-v1.1-topic-prompted" class="btn btn-primary btn-sm">🤗
+              Hugging Face</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Demo videos -->
+  <div class="container shadow p-5 mb-5 bg-white rounded">
+    <h3 lang="ja">各モデルとユーザによる実際の音声対話のサンプル</h3>
+    <h3 lang="en">Samples of real-time spoken dialogue between each model and users</h3>
+    <p lang="ja">
+      <a href="https://spoken-dialogue-arena.vercel.app/">Spoken Dialogue Arena</a> の対話画面で，ユーザが各モデルと実時間で対話した様子です（2026 年 10 月収録）．
+      上段（AI）がモデル，下段（Human）がユーザの音声波形で，中央の文字はモデルの内部テキストストリームです．
+    </p>
+    <p lang="en">
+      Users talking with each model in real time on the <a
+        href="https://spoken-dialogue-arena.vercel.app/">Spoken Dialogue Arena</a> interface (recorded in October
+      2026). The upper waveform (AI) is the model, the lower one (Human) is the user, and the text in the middle is the
+      model's internal text stream.
+    </p>
+    <div class="container py-3" id="demo-video-container"></div>
+
+    <h5 class="mt-4 mb-2">LLM-jp-Moshi-v1.1-topic-prompted: <span lang="ja">話題プロンプトの使い方</span><span
+        lang="en">how the topic prompt works</span></h5>
+    <p lang="ja">
+      <a href="https://github.com/llm-jp/llm-jp-moshi/tree/main/inference">同梱の推論サーバ</a>で，話題のプリセット（15 話題）を選んで「接続」を押すと，モデルがその話題から話し始めます．
+      プロンプトの選択から話し始めまでを収録したものです．
+    </p>
+    <p lang="en">
+      With the <a href="https://github.com/llm-jp/llm-jp-moshi/tree/main/inference">bundled inference server</a>,
+      select one of the 15 preset topics and press "接続" (connect); the model then starts the conversation on that
+      topic. These clips show the steps from selecting the prompt to the model's first utterance.
+    </p>
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-5 mb-3">
+        <div class="ratio" style="--bs-aspect-ratio: 81%;">
+          <video class="object-fit-contain bg-black rounded" controls preload="metadata">
+            <source src="../static/video/20261029/v1.1-topic-prompted-usage-1.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="video-label text-center mt-1" lang="ja">話題:「最近ハマっている趣味や休日の過ごし方」</div>
+        <div class="video-label text-center mt-1" lang="en">Topic: hobbies and how you spend your days off</div>
+      </div>
+      <div class="col-12 col-md-5 mb-3">
+        <div class="ratio" style="--bs-aspect-ratio: 81%;">
+          <video class="object-fit-contain bg-black rounded" controls preload="metadata">
+            <source src="../static/video/20261029/v1.1-topic-prompted-usage-2.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="video-label text-center mt-1" lang="ja">話題:「最近の物価高と、節約や家事の工夫」</div>
+        <div class="video-label text-center mt-1" lang="en">Topic: rising prices, saving money and housework tips</div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Arena results -->
+  <div class="container shadow p-5 mb-5 bg-white rounded">
+    <h3 lang="ja">評価結果（Spoken Dialogue Arena）</h3>
+    <h3 lang="en">Evaluation Results (Spoken Dialogue Arena)</h3>
+    <p lang="ja">
+      <a href="https://spoken-dialogue-arena.vercel.app/">Spoken Dialogue Arena</a> は，評価者が 2 つの音声対話モデルと順に 2 分以上対話し，どちらが良かったかを選ぶ対戦型の評価基盤です．
+      評価者にはモデル名を伏せ，各対話の直後に音声品質・発話タイミング・話し方・応答内容の 4 項目を 5 段階で回答してもらいます．
+      評価者はクラウドソーシング（CrowdWorks）で募集した日本語話者です．
+      左図は <a href="../">LLM-jp-Moshi-v1</a> および <a href="https://huggingface.co/nu-dialogue/j-moshi-ext">J-Moshi-ext</a> との対戦における選好率（勝ち ÷（勝ち + 負け），引き分けは除外），右図は 4 項目の平均評価で，商用の full-duplex 音声対話モデルも併記しています．
+    </p>
+    <p lang="en">
+      The <a href="https://spoken-dialogue-arena.vercel.app/">Spoken Dialogue Arena</a> is a pairwise evaluation
+      platform: each evaluator talks with two spoken dialogue models for at least two minutes each and chooses the
+      better one. Model names are hidden, and after each conversation the evaluator rates four aspects (audio quality,
+      turn-taking timing, speaking style, response content) on a 5-point scale. Evaluators are Japanese speakers
+      recruited via crowdsourcing (CrowdWorks).
+      The left panel shows preference rates against <a href="../">LLM-jp-Moshi-v1</a> and <a
+        href="https://huggingface.co/nu-dialogue/j-moshi-ext">J-Moshi-ext</a> (wins ÷ (wins + losses), ties excluded);
+      the right panel shows the mean ratings of the four aspects, including commercial full-duplex models for
+      reference.
+    </p>
+    <div class="text-center">
+      <img src="../static/image/arena_v1.1.png" alt="Spoken Dialogue Arena results for LLM-jp-Moshi-v1.1"
+        class="img-fluid rounded shadow-sm" style="max-width: 1100px; width: 100%;">
+    </div>
+    <p class="mt-3 text-muted" style="font-size: 0.9rem;" lang="ja">
+      2026 年 10 月 29 日時点．対戦は各対 10〜11 票，右図の n は評価された対話数．票数が少ないため，1 票で選好率が約 10 ポイント動くことに注意してください．
+      「（参考）合成コーパスのみで学習」は，LLM-jp-Zoom1 を混ぜずに合成対話コーパスだけで追加学習した比較用のモデルで，公開はしていません．
+    </p>
+    <p class="mt-3 text-muted" style="font-size: 0.9rem;" lang="en">
+      As of October 29, 2026. Each pairing has 10–11 votes; n in the right panel is the number of rated conversations.
+      Note that with this few votes, a single vote shifts the preference rate by about 10 points.
+      "（参考）合成コーパスのみで学習" (reference: synthetic corpus only) is an unreleased comparison model additionally
+      trained on the synthetic dialogue corpus without LLM-jp-Zoom1.
+    </p>
+  </div>
+
+
+  <div class="container p-5 mb-5 bg-white rounded">
+    <p class="mb-0">
+      This page was adapted from the <a href="https://google-research.github.io/seanet/soundstorm/examples">SoundStorm
+        project page</a>.
+    </p>
+  </div>
+
+  <script>
+    // Demo videos, grouped by model
+    $(document).ready(function () {
+      const videoDir = '../static/video/20261029/';
+      const groups = [
+        { ja: 'LLM-jp-Moshi-v1.1-base', en: 'LLM-jp-Moshi-v1.1-base', files: ['v1.1-base-1.mp4', 'v1.1-base-2.mp4'] },
+        { ja: 'LLM-jp-Moshi-v1.1-topic-prompted', en: 'LLM-jp-Moshi-v1.1-topic-prompted', files: ['v1.1-topic-prompted-1.mp4', 'v1.1-topic-prompted-2.mp4', 'v1.1-topic-prompted-3.mp4', 'v1.1-topic-prompted-4.mp4', 'v1.1-topic-prompted-5.mp4'] },
+      ];
+      groups.forEach(g => {
+        const cols = g.files.map((f, i) => `
+          <div class="col-12 col-md-6 col-lg-4 mb-3">
+            <div class="ratio ratio-2x1">
+              <video class="object-fit-contain bg-black rounded" controls preload="metadata">
+                <source src="${videoDir + f}" type="video/mp4">
+                Your browser does not support HTML video.
+              </video>
+            </div>
+            <div class="video-label text-center mt-1">${g.en} #${i + 1}</div>
+          </div>`).join('');
+        $('#demo-video-container').append(`
+          <h5 class="mt-3 mb-2">${g.en}</h5>
+          <div class="row">${cols}</div>`);
+      });
+    });
+
+    // Hide language switcher on scroll
+    $(document).ready(function () {
+      const langSwitch = $('.lang-switch');
+      $(window).scroll(function () {
+        if ($(this).scrollTop() > 50) {
+          langSwitch.addClass('hidden');
+        } else {
+          langSwitch.removeClass('hidden');
+        }
+      });
+    });
+
+    // Language switching (same behaviour as the top page)
+    $(document).ready(function () {
+      const urlParams = new URLSearchParams(window.location.search);
+      const validLangs = ['ja', 'en'];
+      let defaultLang = 'ja';
+      if (urlParams.has('lang') && validLangs.includes(urlParams.get('lang'))) {
+        defaultLang = urlParams.get('lang');
+      } else {
+        window.history.replaceState({}, document.title, window.location.href.split('?')[0]);
+      }
+      switchLanguage(defaultLang);
+      $('.lang-btn').click(function () {
+        switchLanguage($(this).data('lang'));
+      });
+      function switchLanguage(lang) {
+        $('.lang-btn').removeClass('btn-primary').addClass('btn-outline-primary');
+        $(`.lang-btn[data-lang="${lang}"]`).removeClass('btn-outline-primary').addClass('btn-primary');
+        $('[lang]').removeClass('active-lang');
+        $(`[lang="${lang}"]`).addClass('active-lang');
+      }
+    });
+  </script>
+</body>
+
+</html>
