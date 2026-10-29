@@ -62,7 +62,7 @@ The v1.1-topic-prompted repository additionally contains `prefix_tokens.npz`, us
 
 This section describes how to interact with each of the LLM-jp-Moshi models. For v1 and v1.1-base, you can use the official [Moshi PyTorch implementation](https://github.com/kyutai-labs/moshi/tree/main/moshi) from Kyutai as is (see the original Moshi repository [kyutai-labs/moshi](https://github.com/kyutai-labs/moshi) for implementation details). v1.1-topic-prompted requires a dedicated inference server, so the procedure differs (see below).
 
-### Installation for v1 / v1.1-base
+### Installation
 
 Python 3.10 or higher is required.
 
@@ -70,7 +70,7 @@ Python 3.10 or higher is required.
 pip install 'moshi<=0.2.2'
 ```
 
-### Running v1 / v1.1-base
+### Usage
 
 You can launch the web UI by running `moshi.server`. Specify the 🤗 HuggingFace Hub repository of the model to use with the `--hf-repo` option.
 

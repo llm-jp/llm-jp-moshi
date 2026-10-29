@@ -62,7 +62,7 @@ v1.1-topic-promptedのリポジトリには，加えてプロンプト条件づ�
 
 LLM-jp-Moshiの各モデルと対話する方法を説明します．v1 および v1.1-base はKyutai公式の[MoshiのPyTorch実装](https://github.com/kyutai-labs/moshi/tree/main/moshi)をそのまま使用できます（実装の詳細はオリジナルMoshiのリポジトリ [kyutai-labs/moshi](https://github.com/kyutai-labs/moshi) を参照）．v1.1-topic-prompted は専用の推論サーバが必要なため，手順が異なります（後述）．
 
-### v1 / v1.1-baseのインストール
+### Installation
 
 Python 3.10以上が必要です．
 
@@ -70,7 +70,7 @@ Python 3.10以上が必要です．
 pip install 'moshi<=0.2.2'
 ```
 
-### v1 / v1.1-baseの起動
+### Usage
 
 `moshi.server`を実行することで，対話用のweb UIを起動できます．`--hf-repo`オプションで使用するモデルの 🤗HuggingFace Hubリポジトリを指定してください．
 
