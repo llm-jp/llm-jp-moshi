@@ -122,7 +122,7 @@ const N=500;
 let ws=null,actx=null,proc=null,src=null,stream=null,playAt=0,running=false;
 let aiAnalyser=null,humanAnalyser=null;
 let aiHist=[],huHist=[],aiDisp=new Array(N).fill(0),huDisp=new Array(N).fill(0);
-let tokens=[],micDur=0,playedDur=0,ctxStart=0,t0=null,demoMode=false;
+let tokens=[],micDur=0,ctxStart=0,t0=null;
 
 fetch('/api/prompt').then(r=>r.json()).then(d=>{
   const saved=localStorage.getItem('topic_prompt');
@@ -156,7 +156,7 @@ function live(){
   return [lt,ld];
 }
 setInterval(()=>{
-  if(t0===null||demoMode)return;
+  if(t0===null)return;
   aiHist.push(amp(aiAnalyser)); if(aiHist.length>N)aiHist.shift();
   let e=aiHist.slice(); while(e.length<N)e.unshift(0); aiDisp=smooth(e,5);
   huHist.push(amp(humanAnalyser)); if(huHist.length>N)huHist.shift();
@@ -264,18 +264,6 @@ function draw(){
 }
 requestAnimationFrame(draw);
 
-if(new URLSearchParams(location.search).get('demo')){
-  demoMode=true;t0=Date.now()/1000-32;micDur=33;playedDur=33;
-  const ae=[],he=[];
-  for(let i=0;i<N;i++){const tt=i/N*17;
-    ae.push(Math.sin(tt*1.1)>0.2?0.10+0.07*Math.abs(Math.sin(tt*7)):0.004);
-    he.push(Math.sin(tt*0.9+2.2)>0.45?0.09+0.06*Math.abs(Math.sin(tt*6)):0.003);}
-  aiDisp=smooth(ae,5);huDisp=smooth(he,5);
-  const demo="こんにちは何か旅行の予定はありますか?いいですね温泉は好きですか?";
-  [...demo].forEach((ch,i)=>tokens.push({tk:ch,time:0.3+i/demo.length*0.65,index:i}));
-  $('dot').classList.add('on');$('stlabel').textContent="CONNECTED (DEMO)";
-}
-
 $('connect').onclick=async()=>{
   try{
     actx=new AudioContext({sampleRate:24000});await actx.resume();
@@ -289,7 +277,7 @@ $('connect').onclick=async()=>{
     ws.binaryType='arraybuffer';
     ws.onopen=()=>{running=true;t0=Date.now()/1000;ctxStart=actx.currentTime;playAt=actx.currentTime;
       aiHist=[];huHist=[];aiDisp=new Array(N).fill(0);huDisp=new Array(N).fill(0);
-      tokens=[];micDur=0;playedDur=0;
+      tokens=[];micDur=0;
       $('dot').classList.add('on');$('stlabel').textContent="CONNECTED";
       $('connect').style.display='none';$('disconnect').style.display='';};
     ws.onclose=stop; ws.onerror=stop;
