@@ -4,13 +4,13 @@
 
 [📑 **Paper**](https://aclanthology.org/2026.iwsds-1.10/)
 &nbsp;|&nbsp;
-[🤗 **Models**](https://huggingface.co/models?search=llm-jp-moshi)
+[🤗 **Model**](https://huggingface.co/llm-jp/llm-jp-moshi-v1)
 &nbsp;|&nbsp;
 [🖥️ **Demo**](https://llm-jp.github.io/llm-jp-moshi/)
 
 LLM-jp-Moshiは，日本語におけるfull-duplex音声対話システムです．英語における7Bパラメータのfull-duplex音声対話モデル [Moshi](https://arxiv.org/abs/2410.00037) をベースとし，日本語音声対話データでの追加学習によって構築されました．
 
-このリポジトリでは，LLM-jp-Moshiのモデル群（v1 / v1.1-base / v1.1-prompted）を紹介します．
+このリポジトリでは，LLM-jp-Moshiのモデル群（v1 / v1.1-base / v1.1-topic-prompted）を紹介します．
 
 > [!NOTE]
 > これらのモデルは試作段階であり，その応答は不自然な場合があります．
@@ -27,33 +27,37 @@ LLM-jp-Moshiは，日本語におけるfull-duplex音声対話システムです
 ### LLM-jp-Moshi-v1.1-base
 - **🤗 Model:** [llm-jp/llm-jp-moshi-v1.1-base](https://huggingface.co/llm-jp/llm-jp-moshi-v1.1-base)
 - **学習データ:**
-  - [J-CHAT](https://arxiv.org/abs/2407.15828)（事前学習）
-  - 合成対話コーパス（追加学習：15話題，約4,000時間．LLM-jpで独自に構築，公開に向けて準備中）
+  - [J-CHAT](https://arxiv.org/abs/2407.15828)
+  - 合成対話コーパス（15話題，93,679対話，約4,000時間．LLM-jpで独自に構築，公開に向けて準備中）
 
 v1と同じJ-CHAT事前学習チェックポイントから，LLM-jpで独自に構築した日常的な15話題をカバーする大規模な日本語合成対話コーパス（約4,000時間）のみで追加学習したモデルです．
 
 Moshiへの追加学習入力としてLLM-jp-Zoom1の実対話音声を混合していません．ただし，合成音声の生成にはLLM-jp-Zoom1でファインチューニングしたFireRedTTS-2を使用し，合成時のシステム側話者の参照音声にもLLM-jp-Zoom1から抜粋した一部の音声を使用しています．
 
-使い方はv1と同じく`moshi.server`でそのまま対話できます（Interactive Demo参照）．
-
-### LLM-jp-Moshi-v1.1-prompted
-- **🤗 Model:** [llm-jp/llm-jp-moshi-v1.1-prompted](https://huggingface.co/llm-jp/llm-jp-moshi-v1.1-prompted)
+### LLM-jp-Moshi-v1.1-topic-prompted
+- **🤗 Model:** [llm-jp/llm-jp-moshi-v1.1-topic-prompted](https://huggingface.co/llm-jp/llm-jp-moshi-v1.1-topic-prompted)
 - **学習データ:**（話題ラベル・テキストプロンプト付き）
   - [J-CHAT](https://arxiv.org/abs/2407.15828)
-  - 合成対話コーパス（15話題，約4,000時間．LLM-jpで独自に構築，公開に向けて準備中）
-  - LLM-jp-Zoom1
+  - 合成対話コーパス（15話題，93,679対話，約4,000時間．LLM-jpで独自に構築，公開に向けて準備中）
+  - LLM-jp-Zoom1（Zoomによるオンライン対話データ，1,723対話，約1,000時間）
 
 合成対話コーパスとLLM-jp-Zoom1を追加学習に使用し，話題のテキストプロンプトを付与して学習したモデルです．対話の冒頭でテキストプロンプトとして話題を与えることで，その話題から雑談を始めるように条件づけできます．条件づけの仕組みは [PersonaPlex](https://arxiv.org/abs/2602.06053) のHybrid System Promptのうち，テキストによる話題条件づけの部分のみを参考にしています．プロンプトの書き方や制約の詳細はモデルカードを参照してください．
+
+1学習例の長さは約164秒を上限としています．このため実際に学習に使用したのは，合成コーパスが約3,600時間，LLM-jp-Zoom1は1対話が長い（平均約32分）ため各対話の冒頭のみで計約78時間です．
+
+v1.1-base と v1.1-topic-prompted が使用する合成対話コーパスの音声は，LLM-jp-Zoom1でファインチューニングした音声合成モデルで生成しています．
 
 各リポジトリには，以下のモデルファイルが含まれています:
 - `model.safetensors` - モデル本体の重み
 - `tokenizer_spm_32k_3.model` - テキストトークナイザ（[rinna/japanese-gpt2-medium](https://huggingface.co/rinna/japanese-gpt2-medium)の日本語SentencePieceモデル）
 - `tokenizer-e351c8d8-checkpoint125.safetensors` - 音声トークナイザ（[kyutai/moshiko-pytorch-bf16](https://huggingface.co/kyutai/moshiko-pytorch-bf16)のMimiモデル）
 
+v1.1-topic-promptedのリポジトリには，加えてプロンプト条件づけ用の `prefix_tokens.npz` が含まれます．
+
 
 ## Interactive Demo
 
-ここでは，LLM-jp-Moshi-v1，v1.1-base，v1.1-promptedの3モデルとの対話方法を紹介します．v1とv1.1-baseにはKyutai公式の[MoshiのPyTorch実装](https://github.com/kyutai-labs/moshi/tree/main/moshi)の`moshi.server`を使用し，v1.1-promptedには本リポジトリの専用サーバを使用します．それぞれの実行方法を以下に示します．
+LLM-jp-Moshiの各モデルと対話する方法を説明します．v1 および v1.1-base はKyutai公式の[MoshiのPyTorch実装](https://github.com/kyutai-labs/moshi/tree/main/moshi)をそのまま使用できます（実装の詳細はオリジナルMoshiのリポジトリ [kyutai-labs/moshi](https://github.com/kyutai-labs/moshi) を参照）．v1.1-topic-prompted は専用の推論サーバが必要なため，手順が異なります（後述）．
 
 ### v1 / v1.1-baseのインストール
 
@@ -73,19 +77,16 @@ python -m moshi.server --hf-repo llm-jp/llm-jp-moshi-v1
 python -m moshi.server --hf-repo llm-jp/llm-jp-moshi-v1.1-base
 ```
 
-### v1.1-promptedと対話する場合
+#### v1.1-topic-promptedと対話する場合
 
 > [!NOTE]
-> v1.1-promptedは，テキストプロンプトの前置（prefill）に対応した専用の推論実装が必要なため，`moshi.server`では動作しません．本リポジトリの [`inference/`](inference/) に対応サーバを同梱しています．
+> v1.1-topic-promptedは，テキストプロンプトによる条件づけに対応した専用の推論実装が必要なため，`moshi.server`では動作しません．本リポジトリの [`inference/`](inference/) に対応サーバを同梱しています．
 
 ```bash
-cd inference
-pip install -r requirements.txt
-python server.py --hf-repo llm-jp/llm-jp-moshi-v1.1-prompted
+python inference/server.py --hf-repo llm-jp/llm-jp-moshi-v1.1-topic-prompted
 ```
 
-ブラウザで `http://localhost:8998/` を開き，画面上部の入力欄で話題プロンプトを編集して「接続」を押します．
-オプションは [`inference/README.md`](inference/README.md) を参照してください．
+画面上部で話題プロンプト（学習済み15話題のプリセット）を選択し，「接続」を押して対話を開始します．
 
 ### Tips
 
