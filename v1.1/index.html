@@ -124,12 +124,12 @@
     <h3 lang="ja">各モデルとユーザによる実際の音声対話のサンプル</h3>
     <h3 lang="en">Samples of real-time spoken dialogue between each model and users</h3>
     <p lang="ja">
-      <a href="https://spoken-dialogue-arena.vercel.app/">Spoken Dialogue Arena</a> の対話画面で，ユーザが各モデルと実時間で対話した様子です（2026 年 10 月収録）．
+      <a href="https://spoken-dialogue-arena.vercel.app/">Spoken Dialogue Arena</a> の対話画面で，ユーザが各モデルと実時間で対話した様子です（2026 年 10〜11 月収録）．
       上段（AI）がモデル，下段（Human）がユーザの音声波形で，中央の文字はモデルの内部テキストストリームです．
     </p>
     <p lang="en">
       Users talking with each model in real time on the <a
-        href="https://spoken-dialogue-arena.vercel.app/">Spoken Dialogue Arena</a> interface (recorded in October
+        href="https://spoken-dialogue-arena.vercel.app/">Spoken Dialogue Arena</a> interface (recorded in October–November
       2026). The upper waveform (AI) is the model, the lower one (Human) is the user, and the text in the middle is the
       model's internal text stream.
     </p>
@@ -217,17 +217,16 @@
   <script>
     // Demo videos, grouped by model
     $(document).ready(function () {
-      const videoDir = '../static/video/20261029/';
       const groups = [
-        { ja: 'LLM-jp-Moshi-v1.1-base', en: 'LLM-jp-Moshi-v1.1-base', files: ['v1.1-base-1.mp4', 'v1.1-base-2.mp4'] },
-        { ja: 'LLM-jp-Moshi-v1.1-topic-prompted', en: 'LLM-jp-Moshi-v1.1-topic-prompted', files: ['v1.1-topic-prompted-1.mp4', 'v1.1-topic-prompted-2.mp4', 'v1.1-topic-prompted-3.mp4', 'v1.1-topic-prompted-4.mp4', 'v1.1-topic-prompted-5.mp4'] },
+        { ja: 'LLM-jp-Moshi-v1.1-base', en: 'LLM-jp-Moshi-v1.1-base', dir: '../static/video/20261101/', files: ['v1.1-base-1.mp4', 'v1.1-base-2.mp4', 'v1.1-base-3.mp4'] },
+        { ja: 'LLM-jp-Moshi-v1.1-topic-prompted', en: 'LLM-jp-Moshi-v1.1-topic-prompted', dir: '../static/video/20261029/', files: ['v1.1-topic-prompted-1.mp4', 'v1.1-topic-prompted-2.mp4', 'v1.1-topic-prompted-3.mp4', 'v1.1-topic-prompted-4.mp4', 'v1.1-topic-prompted-5.mp4'] },
       ];
       groups.forEach(g => {
         const cols = g.files.map((f, i) => `
           <div class="col-12 col-md-6 col-lg-4 mb-3">
             <div class="ratio ratio-2x1">
               <video class="object-fit-contain bg-black rounded" controls preload="metadata">
-                <source src="${videoDir + f}" type="video/mp4">
+                <source src="${g.dir + f}" type="video/mp4">
                 Your browser does not support HTML video.
               </video>
             </div>
