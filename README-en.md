@@ -29,8 +29,13 @@ This repository introduces the LLM-jp-Moshi models (v1 / v1.1-base / v1.1-topic-
 - **Training Data:**
   - [J-CHAT](https://arxiv.org/abs/2407.15828)
   - Synthetic dialogue corpus (15 topics, 93,679 dialogues, approx. 4,000 hours; built in-house by LLM-jp, release in preparation)
+  - LLM-jp-Zoom1
 
-A model trained from the same J-CHAT pre-training checkpoint as v1, with additional training only on a large-scale Japanese synthetic dialogue corpus built in-house by LLM-jp, covering 15 everyday topics (approx. 4,000 hours).
+A model additionally trained for two epochs on a mixture of an in-house Japanese synthetic dialogue corpus and real dialogue data from LLM-jp-Zoom1, starting from the same J-CHAT pre-training checkpoint as v1.
+
+The synthetic audio is generated using FireRedTTS-2 fine-tuned on LLM-jp-Zoom1. Selected audio excerpts from LLM-jp-Zoom1, with adjustments to audio quality, are also used as reference audio for the system-side speaker during synthesis.
+
+A [comparison checkpoint additionally trained on synthetic data only](https://huggingface.co/llm-jp/llm-jp-moshi-v1.1-base-synthetic-ft), starting from the same J-CHAT pre-training checkpoint, is also available. Results were similar in our comparative evaluation, while a Japanese full-duplex dialogue benchmark comparison showed that this checkpoint tended to start speaking during the other speaker's turn less readily than v1.1-base. See the linked model card for details.
 
 ### LLM-jp-Moshi-v1.1-topic-prompted
 - **🤗 Model:** [llm-jp/llm-jp-moshi-v1.1-topic-prompted](https://huggingface.co/llm-jp/llm-jp-moshi-v1.1-topic-prompted)
@@ -41,7 +46,7 @@ A model trained from the same J-CHAT pre-training checkpoint as v1, with additio
 
 A model additionally trained on the synthetic dialogue corpus and LLM-jp-Zoom1, with topic text prompts attached. By providing a topic as a text prompt at the beginning of a dialogue, the model can be conditioned to start chatting about that topic. The conditioning mechanism follows the text-based topic conditioning part of the Hybrid System Prompt from [PersonaPlex](https://arxiv.org/abs/2602.06053). See the model card for prompt formats and limitations.
 
-Each training example is capped at about 164 seconds. As a result, the amounts actually used for training are approx. 3,600 hours of the synthetic corpus and approx. 78 hours of LLM-jp-Zoom1, for which only the beginning of each dialogue is used because the recordings are long (about 32 minutes on average).
+For v1.1-topic-prompted, each training example is capped at about 164 seconds. As a result, the amounts actually used for training are approx. 3,600 hours of the synthetic corpus and approx. 78 hours of LLM-jp-Zoom1, for which only the beginning of each dialogue is used because the recordings are long (about 32 minutes on average).
 
 The speech in the synthetic dialogue corpus used by v1.1-base and v1.1-topic-prompted was generated with a text-to-speech model fine-tuned on LLM-jp-Zoom1.
 
@@ -62,7 +67,7 @@ This section describes how to interact with each of the LLM-jp-Moshi models. For
 Python 3.10 or higher is required.
 
 ```bash
-pip install moshi<=0.2.2
+pip install 'moshi<=0.2.2'
 ```
 
 ### Usage
