@@ -72,6 +72,7 @@
         合成対話コーパスの音声は，LLM-jp-Zoom1 でファインチューニングした音声合成モデルで生成しています．
         このページでは，各モデルとユーザによる実際の音声対話のデモ動画と，<a href="https://spoken-dialogue-arena.vercel.app/">Spoken Dialogue Arena</a> による評価結果を紹介します．
         モデルの詳細と使い方は <a href="https://github.com/llm-jp/llm-jp-moshi">GitHub</a> をご覧ください．
+        合成対話コーパスの構築と学習方法，および評価基盤の詳細は<a href="#citation">文献</a>をご覧ください．
       </span>
       <span lang="en">
         LLM-jp-Moshi-v1.1 is a family of models trained from the same J-CHAT pre-training checkpoint as
@@ -81,6 +82,8 @@
         This page presents demo videos of real-time spoken dialogue between each model and users, and evaluation
         results from the <a href="https://spoken-dialogue-arena.vercel.app/">Spoken Dialogue Arena</a>.
         See <a href="https://github.com/llm-jp/llm-jp-moshi">GitHub</a> for model details and usage.
+        Please refer to our <a href="#citation">publications</a> for details of the synthetic dialogue corpus, the training
+        methods, and the evaluation platform.
       </span>
     </p>
   </div>
@@ -176,6 +179,30 @@
   </div>
 
 
+  <div id="citation" class="container shadow p-5 mb-5 bg-white rounded">
+    <h3 lang="ja">引用</h3>
+    <h3 lang="en">Citation</h3>
+    <p lang="ja">LLM-jp-Moshi-v1.1 のモデルについては 1 件目を，Spoken Dialogue Arena による評価については 2 件目を引用してください．</p>
+    <p lang="en">Please cite the first entry for the LLM-jp-Moshi-v1.1 models and the second for the evaluation with the
+      Spoken Dialogue Arena.</p>
+    <pre><code>@inproceedings{kitamura2026synthetic,
+    title={日本語全二重音声対話モデルの学習に向けた合成対話音声の生成とその利用方法の比較},
+    author={北村恒貴 and 神﨑雄介 and 阿部雄斗 and 姜菁菁 and 藤江真也 and 高道慎之介 and 小川哲司 and 東中竜一郎},
+    booktitle={人工知能学会研究会資料 言語・音声理解と対話処理研究会（第108回）},
+    year={2026},
+    month={Nov}
+}
+
+@inproceedings{abe2026arena,
+    title={Spoken Dialogue Arena: A Live, Full-Duplex {A/B} Evaluation Platform for Spoken Dialogue Systems},
+    author={Abe, Yuto and Saeki, Mao and Takamichi, Shinnosuke and Ogawa, Tetsuji and Higashinaka, Ryuichiro},
+    booktitle={NeurIPS 2026 Workshop on Real-Time Conversational Agents (RTCA)},
+    year={2026},
+    month={Dec}
+}</code></pre>
+  </div>
+
+
   <div class="container p-5 mb-5 bg-white rounded">
     <p class="mb-0">
       This page was adapted from the <a href="https://google-research.github.io/seanet/soundstorm/examples">SoundStorm
@@ -187,7 +214,7 @@
     // Demo videos, grouped by model
     $(document).ready(function () {
       const groups = [
-        { ja: 'LLM-jp-Moshi-v1.1-base', en: 'LLM-jp-Moshi-v1.1-base', dir: '../static/video/', files: ['20261101/v1.1-base-2.mp4', '20261029/v1.1-base-kusunoki.mp4'] },
+        { ja: 'LLM-jp-Moshi-v1.1-base', en: 'LLM-jp-Moshi-v1.1-base', dir: '../static/video/', files: ['20261101/v1.1-base-2.mp4', '20261029/v1.1-base-4.mp4'] },
         { ja: 'LLM-jp-Moshi-v1.1-topic-prompted', en: 'LLM-jp-Moshi-v1.1-topic-prompted', dir: '../static/video/20261029/', files: ['v1.1-topic-prompted-3.mp4', 'v1.1-topic-prompted-4.mp4', 'v1.1-topic-prompted-5.mp4'] },
       ];
       groups.forEach(g => {
